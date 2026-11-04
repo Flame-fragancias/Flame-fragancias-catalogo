@@ -4,14 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d0c0a">
-  <meta name="description" content="Catálogo minorista de Flame Fragancias: perfumes 100% originales en caja cerrada, con envíos en Argentina.">
+  <meta name="description" content="Perfumes árabes, de diseñador y nicho en Argentina. Elegí tu perfume, escribinos por WhatsApp y te lo llevamos. Envío gratis en CABA y GBA.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Flame Fragancias — Perfumería de autor">
-  <meta property="og:description" content="Catálogo minorista de fragancias de diseñador, árabes, de nicho y femeninas. Perfumes 100% originales en caja cerrada, con envíos en Argentina.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1200&h=630&q=85">
-  <meta property="og:image:alt" content="Selección de fragancias de lujo de Flame Fragancias">
+  <meta property="og:title" content="FLAME Fragancias | Árabes, diseñador y nicho">
+  <meta property="og:description" content="Elegí tu perfume, escribinos y te lo llevamos. Envío gratis en CABA y GBA.">
+  <meta property="og:url" content="https://flame-fragancias.github.io/Flame-fragancias-catalogo/">
+  <meta property="og:image" content="https://flame-fragancias.github.io/Flame-fragancias-catalogo/og-image.jpg">
+  <link rel="canonical" href="https://flame-fragancias.github.io/Flame-fragancias-catalogo/">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FLAME Fragancias: perfumes árabes, de diseñador y nicho">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Flame Fragancias — Perfumería de autor</title>
+  <title>FLAME Fragancias | Árabes, diseñador y nicho</title>
   <link rel="icon" type="image/jpeg" href="img/favicon.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1234,6 +1238,285 @@
       outline: none;
     }
 
+    /* ───────────────────────── Botones de la tarjeta ───────────────────────── */
+    .product-actions {
+      display: grid;
+      order: 2;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    /* «Pedilo ya» lleva el peso visual; «Consultar» queda solo con borde */
+    .order-button:not(.is-secondary) {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .order-button:not(.is-secondary)::before {
+      background: var(--accent-soft);
+    }
+
+    .order-button:not(.is-secondary):hover,
+    .order-button:not(.is-secondary):focus-visible {
+      border-color: var(--accent-soft);
+    }
+
+    .order-button.is-secondary {
+      color: var(--ink-soft);
+    }
+
+    .product-notice {
+      margin: 0 0 12px;
+      color: var(--accent-soft);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .06em;
+    }
+
+    /* ───────────────────────── Ayuda para elegir ───────────────────────── */
+    .help-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 0 clamp(36px, 5vw, 56px);
+      padding: 22px 28px;
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      background: var(--bg-raised);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.2vw, 24px);
+      font-style: italic;
+      line-height: 1.25;
+      text-decoration: none;
+      transition: border-color .3s ease, color .3s ease;
+    }
+
+    .help-cta:hover,
+    .help-cta:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent-soft);
+      outline: none;
+    }
+
+    .help-arrow {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-family: var(--sans);
+      font-size: 22px;
+      font-style: normal;
+      transition: transform .35s var(--ease);
+    }
+
+    .help-cta:hover .help-arrow {
+      transform: translateX(4px);
+    }
+
+    .duration-note {
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+
+    /* ───────────────────────── Cómo comprar · Envíos · Preguntas ───────────────────────── */
+    .how-to-buy,
+    .shipping-info,
+    .faq {
+      width: min(100% - var(--gutter) * 2, var(--max));
+      margin: clamp(72px, 10vw, 140px) auto 0;
+    }
+
+    .section-heading {
+      margin-bottom: clamp(32px, 4vw, 52px);
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(38px, 5.5vw, 72px);
+      font-weight: 300;
+      letter-spacing: -.015em;
+      line-height: .95;
+    }
+
+    .section-heading h2 em {
+      color: var(--accent-soft);
+      font-style: italic;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      padding: 28px 26px 30px;
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      background: var(--bg-raised);
+    }
+
+    .step-number {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 44px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .steps p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .steps strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .guarantee {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 26px 0 0;
+      color: var(--accent-soft);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+    }
+
+    .guarantee span {
+      color: var(--accent);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-style: normal;
+    }
+
+    .info-list {
+      margin: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .info-list div {
+      display: grid;
+      grid-template-columns: minmax(160px, .4fr) minmax(0, 1fr);
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-list dt {
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .info-list dd {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+    }
+
+    .faq-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-list details {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-list summary {
+      display: flex;
+      min-height: 68px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--ink);
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.4vw, 26px);
+      list-style: none;
+    }
+
+    .faq-list summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-list summary::after {
+      flex: 0 0 auto;
+      color: var(--accent);
+      content: "+";
+      font-family: var(--sans);
+      font-size: 24px;
+      font-weight: 300;
+      transition: transform .3s var(--ease);
+    }
+
+    .faq-list details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-list p {
+      max-width: 720px;
+      margin: 0 0 24px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Instagram visible en el encabezado */
+    .header-instagram {
+      display: inline-flex;
+      min-height: 40px;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .3s ease, border-color .3s ease;
+    }
+
+    .header-instagram:hover,
+    .header-instagram:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent-soft);
+      outline: none;
+    }
+
+    .header-instagram svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.4;
+    }
+
     /* ───────────────────────── Footer ───────────────────────── */
     .site-footer {
       width: min(100% - var(--gutter) * 2, var(--max));
@@ -1450,6 +1733,14 @@
       }
 
       .wholesale {
+        grid-template-columns: 1fr;
+      }
+
+      .header-instagram {
+        margin-left: auto;
+      }
+
+      .steps {
         grid-template-columns: 1fr;
       }
     }
@@ -1703,8 +1994,43 @@
         flex-direction: column;
       }
 
+      /* en el celular el botón de WhatsApp queda visible, solo con el ícono */
       .floating-whatsapp {
+        right: max(16px, env(safe-area-inset-right));
+        bottom: max(16px, env(safe-area-inset-bottom));
+        min-height: 56px;
+        padding: 0 17px;
+      }
+
+      .floating-whatsapp span {
         display: none;
+      }
+
+      .floating-whatsapp svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .header-instagram {
+        padding: 0 12px;
+      }
+
+      .header-instagram span {
+        display: none;
+      }
+
+      .product-actions {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .help-cta {
+        padding: 18px 20px;
+      }
+
+      .info-list div {
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
     }
 
@@ -1729,21 +2055,31 @@
   <header class="site-header">
     <a class="brand" href="#" aria-label="Flame Fragancias, inicio">
       FLAME FRAGANCIAS
-      <span>PERFUMERÍA DE AUTOR</span>
+      <span>ÁRABES, DISEÑADOR Y NICHO</span>
     </a>
     <nav class="desktop-nav" aria-label="Navegación principal">
       <a href="#catalog-title">Colección</a>
       <a href="#marcas">Marcas</a>
-      <a href="#mayorista">Ventas mayoristas</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#como-comprar">Cómo comprar</a>
+      <a href="#envios">Envíos y pagos</a>
+      <a href="#preguntas">Preguntas</a>
     </nav>
+    <a class="header-instagram" href="https://www.instagram.com/flame.fragancias?psln=aGZmbG53eXpwYjZn" target="_blank" rel="noopener noreferrer" aria-label="Seguir Flame Fragancias en Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.6" cy="6.7" r=".8" fill="currentColor" stroke="none"></circle>
+      </svg>
+      <span>Instagram</span>
+    </a>
     <details class="quick-nav">
       <summary aria-label="Abrir navegación"><span class="menu-icon" aria-hidden="true"></span> Menú</summary>
       <nav class="quick-nav-list" aria-label="Navegación principal (móvil)">
         <a href="#catalog-title">Colección</a>
         <a href="#marcas">Marcas</a>
-        <a href="#mayorista">Ventas mayoristas</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#como-comprar">Cómo comprar</a>
+        <a href="#envios">Envíos y pagos</a>
+        <a href="#preguntas">Preguntas</a>
       </nav>
     </details>
   </header>
@@ -1753,10 +2089,10 @@
       <div class="hero-text">
         <span class="eyebrow">Una esencia, una historia</span>
         <h1 id="hero-title">El arte de <em>dejar huella</em></h1>
-        <p class="hero-copy">Catálogo minorista de fragancias 100% originales, solo en versiones de caja cerrada.</p>
+        <p class="hero-copy">Elegí tu perfume, escribinos y te lo llevamos. Envío gratis en CABA y GBA.</p>
         <div class="hero-actions">
           <a class="hero-cta" href="#catalog-title">Explorar colección <span aria-hidden="true">↓</span></a>
-          <a class="hero-link" href="#mayorista">Ventas mayoristas</a>
+          <a class="hero-link" href="#como-comprar">Cómo comprar</a>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -1777,17 +2113,30 @@
             <path d="M40 124h40M46 132h28" opacity=".7"/>
           </svg>
         </div>
-        <span class="hero-caption">Perfumería de autor — Argentina</span>
-        <div class="hero-seal"><span><strong>100%</strong>originales</span></div>
+        <span class="hero-caption">Árabes, diseñador y nicho — Argentina</span>
+        <div class="hero-seal"><span><strong>Gratis</strong>envío CABA y GBA</span></div>
       </div>
     </section>
 
-    <div class="shipping-highlights reveal" aria-label="Información de envíos y autenticidad">
+    <div class="shipping-highlights reveal" aria-label="Envíos y pagos">
       <span data-index="i.">Envío gratis en CABA y GBA</span>
-      <span data-index="ii.">Resto del país: a consultar</span>
-      <span data-index="iii.">100% originales</span>
-      <span data-index="iv.">Solo caja cerrada</span>
+      <span data-index="ii.">Resto del país: +$15.000</span>
+      <span data-index="iii.">Patagonia: +$20.000</span>
+      <span data-index="iv.">Transferencia o Mercado Pago</span>
     </div>
+
+    <section class="how-to-buy reveal" id="como-comprar" aria-labelledby="how-title">
+      <div class="section-heading">
+        <span class="eyebrow">Simple y por WhatsApp</span>
+        <h2 id="how-title">Cómo <em>comprar</em></h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-number">1</span><p>Elegí tu perfume y tocá <strong>“Pedilo ya”</strong> o <strong>“Consultar”</strong>.</p></li>
+        <li><span class="step-number">2</span><p>Confirmamos stock y precio por WhatsApp y te pasamos los datos de pago.</p></li>
+        <li><span class="step-number">3</span><p>Te llega a tu casa: en CABA, en menos de 2 días (si pedís antes de las 13 h, el mismo día). Fuera de Buenos Aires, en 1 a 2 semanas.</p></li>
+      </ol>
+      <p class="guarantee"><span aria-hidden="true">✦</span> Garantía: todos nuestros perfumes son 100% originales.</p>
+    </section>
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track" id="marquee-track"></div>
@@ -1829,8 +2178,56 @@
           <button class="filter-button" type="button" data-filter="Femenino" aria-pressed="false">Femeninos</button>
         </nav>
       </div>
-      <p class="notes-disclaimer">Las notas son orientativas y pueden variar según concentración, reformulación y mercado. Algunas versiones no pudieron identificarse con seguridad.</p>
+      <p class="notes-disclaimer">Las notas son orientativas y pueden variar según concentración, reformulación y mercado.</p>
+      <a class="help-cta" href="https://wa.me/541165955116?text=Hola,%20no%20s%C3%A9%20cu%C3%A1l%20elegir.%20Me%20gusta%20el%20perfume%20...%20%C2%BFMe%20recomiendan%20uno%20parecido%3F%20(vi%20la%20web)" target="_blank" rel="noopener noreferrer">
+        <span>¿No sabés cuál elegir? Contanos qué perfume te gusta y te recomendamos uno parecido</span>
+        <span class="help-arrow" aria-hidden="true">→</span>
+      </a>
       <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      <p class="duration-note">Duración estimada según reseñas; varía con la piel y el clima.</p>
+    </section>
+
+    <section class="shipping-info reveal" id="envios" aria-labelledby="shipping-title">
+      <div class="section-heading">
+        <span class="eyebrow">A todo el país</span>
+        <h2 id="shipping-title">Envíos <em>y pagos</em></h2>
+      </div>
+      <dl class="info-list">
+        <div><dt>CABA y GBA</dt><dd>Envío gratis</dd></div>
+        <div><dt>Resto del país</dt><dd>+$15.000</dd></div>
+        <div><dt>Patagonia</dt><dd>+$20.000</dd></div>
+        <div><dt>Formas de pago</dt><dd>Transferencia bancaria y Mercado Pago</dd></div>
+        <div><dt>Tiempo de entrega</dt><dd>CABA: menos de 2 días (pedidos antes de las 13 h llegan el mismo día). Fuera de Buenos Aires: 1 a 2 semanas.</dd></div>
+      </dl>
+    </section>
+
+    <section class="faq reveal" id="preguntas" aria-labelledby="faq-title">
+      <div class="section-heading">
+        <span class="eyebrow">Antes de pedir</span>
+        <h2 id="faq-title">Preguntas <em>frecuentes</em></h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>¿Vienen en caja cerrada?</summary>
+          <p>Sí, vienen en su caja cerrada de fábrica. La única excepción es el Baccarat Rouge 540 tester, que viene sin caja (es el mismo perfume) y lo aclaramos en su tarjeta.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto tarda en llegar?</summary>
+          <p>En CABA, menos de 2 días; si pedís antes de las 13 h, te llega el mismo día. Fuera de Buenos Aires, entre 1 y 2 semanas.</p>
+        </details>
+        <details>
+          <summary>¿Cómo pago?</summary>
+          <p>Por transferencia bancaria o Mercado Pago. Te pasamos los datos por WhatsApp cuando confirmamos tu pedido.</p>
+        </details>
+        <details>
+          <summary>¿Hacen envíos al interior?</summary>
+          <p>Sí, a todo el país. El envío cuesta $15.000 y a la Patagonia $20.000. En CABA y GBA es gratis.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si el perfume no está en stock?</summary>
+          <p>Te avisamos por WhatsApp cuando confirmamos el pedido, antes de que pagues, y te recomendamos opciones parecidas.</p>
+        </details>
+      </div>
     </section>
 
     <section class="wholesale reveal" id="mayorista" aria-labelledby="wholesale-title">
@@ -1866,10 +2263,10 @@
       </nav>
     </div>
     <div class="footer-brand" aria-hidden="true">FLAME FRAGANCIAS</div>
-    <p class="footer-note"><span>Una firma para cada historia · © Flame Fragancias</span><span>Perfumería de autor</span></p>
+    <p class="footer-note"><span>Una firma para cada historia · © Flame Fragancias</span><span>Árabes, diseñador y nicho</span></p>
   </footer>
 
-  <a class="floating-whatsapp" href="https://wa.me/541165955116" target="_blank" rel="noopener noreferrer" aria-label="Contactanos por WhatsApp">
+  <a class="floating-whatsapp" href="https://wa.me/541165955116?text=Hola,%20quiero%20que%20me%20ayuden%20a%20elegir%20un%20perfume%20(vi%20la%20web)" target="_blank" rel="noopener noreferrer" aria-label="Contactanos por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M20.1 11.7a8.1 8.1 0 0 1-12 7.1L3 20l1.3-4.8a8.1 8.1 0 1 1 15.8-3.5Z"></path>
       <path d="M8.5 8.2c.3-.6.6-.6.9-.6h.4c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4 0 .6l-.5.7c-.2.2-.3.4-.1.7.5.8 1.2 1.5 2 1.9.3.2.5.2.7-.1l.8-.9c.2-.2.4-.3.7-.2l1.6.8c.3.1.4.3.4.5 0 .3-.2 1.1-.7 1.5-.5.5-1.3.7-2 .6-1.1-.2-2.4-.8-3.7-2-1.1-1-1.9-2.2-2.2-3.1-.3-.8-.1-1.8.5-2.5Z"></path>
@@ -1957,7 +2354,7 @@
       "Yum Yum": { Salida: "Frutos rojos, cítricos, notas dulces", Corazón: "Flores blancas, caramelo", Fondo: "Vainilla, almizcle, ámbar" },
       "Club de Nuit Woman": { Salida: "Naranja, pomelo, bergamota", Corazón: "Rosa, jazmín, lichi", Fondo: "Pachuli, vainilla, almizcle" }
     };
-    notasPorFragancia["Baccarat Rouge 540 tester"] = notasPorFragancia["Baccarat Rouge 540"];
+  notasPorFragancia["Baccarat Rouge 540 tester"] = notasPorFragancia["Baccarat Rouge 540"];
    const imagenesPorFragancia = {
   "Dior Sauvage EDP": "dior-sauvage-edp.jpg",
   "Dior Pour Homme Intense": "dior-homme-intense.jpg",
@@ -2037,6 +2434,81 @@
   "Yum Yum": "Armaf Yum Yum.webp",
   "Club de Nuit Woman": "Armaf Club de Nuit Woman.webp"
 };
+    };
+    // Duración estimada según reseñas de sitios de perfumería (rangos, no mediciones). Sin dato confiable → "Consultá".
+    const duracionEstimada = {
+      "Dior Sauvage EDP": "6–10 h",
+      "Dior Pour Homme Intense": "6–10 h",
+      "Dior Sauvage Elixir (100 ml)": "6–10 h",
+      "Le Male Elixir (125 ml)": "6–10 h",
+      "Le Male Le Parfum (125 ml)": "6–10 h",
+      "Le Beau Le Parfum (125 ml)": "6–10 h",
+      "Le Beau Paradise Garden (125 ml)": "4–6 h",
+      "1 Million (Clásico)": "6–10 h",
+      "1 Million Elixir Parfum Intense": "6–10 h",
+      "Invictus Victory": "4–6 h",
+      "Invictus Parfum": "4–6 h",
+      "Y Eau de Parfum (YSL Y)": "4–6 h",
+      "Versace Eros EDP": "4–6 h",
+      "Versace Eros EDT": "4–6 h",
+      "Versace Dylan Blue (200 ml)": "4–6 h",
+      "Acqua Di Gio Profondo EDP (125 ml)": "4–6 h",
+      "Stronger With You Intensely": "6–10 h",
+      "Uomo Born In Roma": "4–6 h",
+      "Bad Boy Le Parfum": "4–6 h",
+      "212 VIP Black Elixir": "4–6 h",
+      "Most Wanted Parfum": "4–6 h",
+      "Wanted EDT": "4–6 h",
+      "Khamrah": "6–10 h",
+      "Khamrah Qahwa": "6–10 h",
+      "Asad (Clásico)": "4–6 h",
+      "Asad Bourbon": "4–6 h",
+      "Asad Elixir": "+10 h",
+      "Art of Universe": "4–6 h",
+      "Club de Nuit Intense Man (EDP)": "6–10 h",
+      "Sky Mandarin": "4–6 h",
+      "Sky Mandarin Elixir": "6–10 h",
+      "Odyssey Mega": "4–6 h",
+      "9 PM": "6–10 h",
+      "9 PM Rebel": "6–10 h",
+      "Hawas Ice": "6–10 h",
+      "Hawas Malibu": "4–6 h",
+      "Hawas Elixir": "6–10 h",
+      "Hawas Black": "6–10 h",
+      "Hawas Tropical": "4–6 h",
+      "Amber Oud Gold Edition": "6–10 h",
+      "Bharara King": "6–10 h",
+      "Liquid Brun": "6–10 h",
+      "Baccarat Rouge 540 tester": "6–10 h",
+      "Aventus Absolu": "4–6 h",
+      "Aventus": "4–6 h",
+      "Soleil Blanc EDP": "4–6 h",
+      "Rose Prick EDP": "4–6 h",
+      "Layton Exclusif": "6–10 h",
+      "Erba Pura": "8–10 h",
+      "Naxos": "8–10 h",
+      "Miss Dior EDP": "4–6 h",
+      "Good Girl EDP (Clásico 80 ml)": "4–6 h",
+      "Good Girl Blush (80 ml)": "4–6 h",
+      "212 VIP Rosé (80 ml)": "4–6 h",
+      "Acqua Di Gioia EDP": "4–6 h",
+      "La Belle EDP": "4–6 h",
+      "The Only One Intense": "4–6 h",
+      "Yara Candy": "4–6 h",
+      "Yara Pink": "4–6 h",
+      "Eclaire": "4–6 h",
+      "Her Confession": "4–6 h",
+      "Yum Yum": "4–6 h",
+      "Club de Nuit Woman": "4–6 h"
+    };
+
+    // femeninos de casas árabes: también aparecen en el filtro "Árabes"
+    const arabesFemeninos = new Set(["Yara Candy", "Yara Pink", "Yara Elixir", "Eclaire", "Her Confession", "Yum Yum", "Club de Nuit Woman"]);
+
+    const avisosPorFragancia = {
+      "Baccarat Rouge 540 tester": "Tester: sin caja, mismo perfume"
+    };
+
     const perfumes = [
       { nombre: "Dior Sauvage EDP", marca: "Dior", categoria: "Diseñador", precio: 250000 },
       { nombre: "Dior Pour Homme Intense", marca: "Dior", categoria: "Diseñador", precio: 285000 },
@@ -2119,7 +2591,9 @@
       id: indice + 1,
       imagen: imagenesPorFragancia[perfume.nombre],
       notas: notasPorFragancia[perfume.nombre],
-      duracion: "8-10 horas",
+      duracion: duracionEstimada[perfume.nombre] ?? "Consultá",
+      filtros: [perfume.categoria, ...(arabesFemeninos.has(perfume.nombre) ? ["Árabe"] : [])],
+      aviso: avisosPorFragancia[perfume.nombre],
       ...perfume
     }));
 
@@ -2265,31 +2739,40 @@
       content.className = "product-content";
       content.append(
         createTextElement("p", "product-brand", perfume.marca),
-        createTextElement("h3", "product-name", perfume.nombre),
-        createNotes(perfume)
+        createTextElement("h3", "product-name", perfume.nombre)
       );
+      if (perfume.aviso) {
+        content.append(createTextElement("p", "product-notice", perfume.aviso));
+      }
+      content.append(createNotes(perfume));
 
       const meta = document.createElement("div");
       meta.className = "product-meta";
       const duration = document.createElement("div");
       duration.append(
-        createTextElement("span", "duration-label", "Duración"),
+        createTextElement("span", "duration-label", "Duración estimada"),
         createTextElement("span", "duration-value", perfume.duracion)
       );
       const price = createTextElement("span", "product-price", currencyFormatter.format(perfume.precio));
       meta.append(duration, price);
 
-      const orderLink = document.createElement("a");
-      orderLink.className = "order-button";
-      orderLink.href = `https://wa.me/541165955116?text=Hola,%20quiero%20pedir%20el%20perfume%20${encodeURIComponent(perfume.nombre)}`;
-      orderLink.target = "_blank";
-      orderLink.rel = "noopener noreferrer";
-      orderLink.setAttribute("aria-label", `Pedir ${perfume.nombre} por WhatsApp`);
-      orderLink.append(
-        document.createTextNode("PEDILO YA"),
-        createTextElement("span", "order-arrow", "↗")
+      const whatsappLink = (mensaje, className, label, ariaLabel) => {
+        const link = document.createElement("a");
+        link.className = className;
+        link.href = `https://wa.me/541165955116?text=${encodeURIComponent(mensaje)}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.setAttribute("aria-label", ariaLabel);
+        link.append(document.createTextNode(label), createTextElement("span", "order-arrow", "↗"));
+        return link;
+      };
+      const actions = document.createElement("div");
+      actions.className = "product-actions";
+      actions.append(
+        whatsappLink(`Hola, quiero pedir el perfume ${perfume.nombre} (vi la web)`, "order-button", "PEDILO YA", `Pedir ${perfume.nombre} por WhatsApp`),
+        whatsappLink(`Hola, tengo una consulta sobre el ${perfume.nombre} (vi la web)`, "order-button is-secondary", "CONSULTAR", `Consultar por ${perfume.nombre} por WhatsApp`)
       );
-      content.append(meta, orderLink);
+      content.append(meta, actions);
       card.append(visual, content);
       return card;
     }
@@ -2297,7 +2780,7 @@
     function renderPerfumes() {
       const searchTerm = normalizeSearchTerm(activeSearch.trim());
       const visiblePerfumes = perfumes.filter((perfume) => {
-        const matchesCategory = activeFilter === "Todos" || perfume.categoria === activeFilter;
+        const matchesCategory = activeFilter === "Todos" || perfume.filtros.includes(activeFilter);
         const matchesSearch = !searchTerm
           || normalizeSearchTerm(`${perfume.nombre} ${perfume.marca}`).includes(searchTerm);
         return matchesCategory && matchesSearch;
@@ -2423,10 +2906,8 @@
         scheduleCatalogRender();
       });
     });
-  
 
     renderPerfumes();
-    function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"d4c0d21e87fb36fc316f8dac40026d93"})});
   </script>
 </body>
 </html>
