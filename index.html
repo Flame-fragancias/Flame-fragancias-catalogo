@@ -2049,6 +2049,10 @@
         transform: none;
       }
     }
+      /* Sin stock */
+    .product-card.is-out-of-stock .product-image { filter: grayscale(1); opacity: .55; }
+    .product-card.is-out-of-stock .product-price { opacity: .7; font-size: .95em; }
+    .stock-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; color: #fff; padding: .45em 1em; border-radius: 999px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; z-index: 2; }
   </style>
 </head>
 <body>
@@ -2501,6 +2505,10 @@
       "Baccarat Rouge 540 tester": "Tester: sin caja, mismo perfume"
     };
 
+    // Perfumes SIN STOCK: se muestran al final, sin precio y solo con el botón de consultar.
+    // Para volver a venderlo, borralo de esta lista (el nombre tiene que estar igual que abajo).
+    const sinStock = ["Aventus", "My Way (Sunny Vanilla EDP)", "Art of Universe", "Baccarat Rouge 540 tester", "Acqua Di Gioia EDP"];
+
     const perfumes = [
       { nombre: "Dior Sauvage EDP", marca: "Dior", categoria: "Diseñador", precio: 250000 },
       { nombre: "Dior Pour Homme Intense", marca: "Dior", categoria: "Diseñador", precio: 285000 },
@@ -2532,7 +2540,7 @@
       { nombre: "Khamrah", marca: "Lattafa", categoria: "Árabe", precio: 82000 },
       { nombre: "Khamrah Qahwa", marca: "Lattafa", categoria: "Árabe", precio: 85000 },
       { nombre: "Asad (Clásico)", marca: "Lattafa", categoria: "Árabe", precio: 89000 },
-      { nombre: "Asad Bourbon", marca: "Lattafa", categoria: "Árabe", precio: 92000 },
+      { nombre: "Asad Bourbon", marca: "Lattafa", categoria: "Árabe", precio: 99000 },
       { nombre: "Asad Elixir", marca: "Lattafa", categoria: "Árabe", precio: 94000 },
       { nombre: "Art of Universe", marca: "Lattafa", categoria: "Árabe", precio: 93000 },
       { nombre: "Club de Nuit Intense Man (EDP)", marca: "Armaf", categoria: "Árabe", precio: 100000 },
@@ -2551,7 +2559,7 @@
       { nombre: "Amber Oud Gold Edition", marca: "Al Haramain", categoria: "Árabe", precio: 120000 },
       { nombre: "Bharara King", marca: "Bharara", categoria: "Árabe", precio: 139900 },
       { nombre: "Rey de Reyes", marca: "Bharara", categoria: "Árabe", precio: 152000 },
-      { nombre: "Veneno Negro", marca: "French Avenue (Fragrance World)", categoria: "Árabe", precio: 129000 },
+      { nombre: "Veneno Negro", marca: "French Avenue (Fragrance World)", categoria: "Árabe", precio: 119000 },
       { nombre: "Liquid Brun", marca: "French Avenue (Fragrance World)", categoria: "Árabe", precio: 112000 },
       { nombre: "Baccarat Rouge 540 tester", marca: "Maison Francis Kurkdjian", categoria: "Nicho", precio: 480000 },
       { nombre: "Aventus Absolu", marca: "Creed", categoria: "Nicho", precio: 920000 },
@@ -2575,12 +2583,13 @@
       { nombre: "Yara Candy", marca: "Lattafa", categoria: "Femenino", precio: 82000 },
       { nombre: "Yara Pink", marca: "Lattafa", categoria: "Femenino", precio: 82000 },
       { nombre: "Yara Elixir", marca: "Lattafa", categoria: "Femenino", precio: 93000 },
-      { nombre: "Eclaire", marca: "Lattafa", categoria: "Femenino", precio: 90000 },
+      { nombre: "Eclaire", marca: "Lattafa", categoria: "Femenino", precio: 96000 },
       { nombre: "Her Confession", marca: "Lattafa", categoria: "Femenino", precio: 92000 },
       { nombre: "Yum Yum", marca: "Armaf", categoria: "Femenino", precio: 120000 },
       { nombre: "Club de Nuit Woman", marca: "Armaf", categoria: "Femenino", precio: 100000 }
     ].map((perfume, indice) => ({
       id: indice + 1,
+      sinStock: sinStock.includes(perfume.nombre),
       imagen: imagenesPorFragancia[perfume.nombre],
       notas: notasPorFragancia[perfume.nombre],
       duracion: duracionEstimada[perfume.nombre] ?? "Consultá",
@@ -2726,6 +2735,10 @@
       const category = createTextElement("span", "category-tag", perfume.categoria);
       const index = createTextElement("span", "product-index", `Nº ${String(perfume.id).padStart(2, "0")}`);
       visual.append(image, category, index);
+      if (perfume.sinStock) {
+        card.classList.add("is-out-of-stock");
+        visual.append(createTextElement("span", "stock-badge", "Sin stock"));
+      }
 
       const content = document.createElement("div");
       content.className = "product-content";
@@ -2745,7 +2758,7 @@
         createTextElement("span", "duration-label", "Duración estimada"),
         createTextElement("span", "duration-value", perfume.duracion)
       );
-      const price = createTextElement("span", "product-price", currencyFormatter.format(perfume.precio));
+      const price = createTextElement("span", "product-price", perfume.sinStock ? "Sin stock" : currencyFormatter.format(perfume.precio));
       meta.append(duration, price);
 
       const whatsappLink = (mensaje, className, label, ariaLabel) => {
@@ -2760,10 +2773,16 @@
       };
       const actions = document.createElement("div");
       actions.className = "product-actions";
-      actions.append(
-        whatsappLink(`Hola, quiero pedir el perfume ${perfume.nombre} (vi la web)`, "order-button", "PEDILO YA", `Pedir ${perfume.nombre} por WhatsApp`),
-        whatsappLink(`Hola, tengo una consulta sobre el ${perfume.nombre} (vi la web)`, "order-button is-secondary", "CONSULTAR", `Consultar por ${perfume.nombre} por WhatsApp`)
-      );
+      if (perfume.sinStock) {
+        actions.append(
+          whatsappLink(`Hola, quiero saber cuándo vuelve el ${perfume.nombre} (vi la web)`, "order-button is-secondary", "CONSULTAR DISPONIBILIDAD", `Consultar disponibilidad de ${perfume.nombre} por WhatsApp`)
+        );
+      } else {
+        actions.append(
+          whatsappLink(`Hola, quiero pedir el perfume ${perfume.nombre} (vi la web)`, "order-button", "PEDILO YA", `Pedir ${perfume.nombre} por WhatsApp`),
+          whatsappLink(`Hola, tengo una consulta sobre el ${perfume.nombre} (vi la web)`, "order-button is-secondary", "CONSULTAR", `Consultar por ${perfume.nombre} por WhatsApp`)
+        );
+      }
       content.append(meta, actions);
       card.append(visual, content);
       return card;
@@ -2782,6 +2801,7 @@
       } else if (activeSort === "price-descending") {
         visiblePerfumes.sort((first, second) => second.precio - first.precio || first.id - second.id);
       }
+      visiblePerfumes.sort((first, second) => Number(first.sinStock) - Number(second.sinStock));
       const fragment = document.createDocumentFragment();
 
       visiblePerfumes.forEach((perfume, position) => {
