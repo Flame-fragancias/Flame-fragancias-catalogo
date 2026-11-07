@@ -2054,6 +2054,25 @@
     .product-card.is-out-of-stock .product-price { opacity: .7; font-size: .95em; }
     .stock-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; color: #fff; padding: .45em 1em; border-radius: 999px; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; z-index: 2; }
   </style>
+  <!-- Metricool: visitas a la web -->
+  <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"d4c0d21e87fb36fc316f8dac40026d93"})});</script>
+  <!-- Clics en botones de WhatsApp: se registran en Metricool (páginas "?clic=...") y en el Pixel de Meta si está instalado -->
+  <script>
+    document.addEventListener("click", function (evento) {
+      var enlace = evento.target.closest && evento.target.closest('a[href*="wa.me"]');
+      if (!enlace) return;
+      var etiqueta = (enlace.getAttribute("aria-label") || enlace.textContent || "whatsapp").trim();
+      try { if (window.fbq) window.fbq("track", "Contact", { content_name: etiqueta }); } catch (e) {}
+      try {
+        if (window.beTracker) {
+          var actual = location.href;
+          history.replaceState(null, "", location.pathname + "?clic=" + encodeURIComponent(etiqueta.replace(/\s+/g, "-").toLowerCase()));
+          window.beTracker.t({ hash: "d4c0d21e87fb36fc316f8dac40026d93" });
+          history.replaceState(null, "", actual);
+        }
+      } catch (e) {}
+    }, true);
+  </script>
 </head>
 <body>
   <header class="site-header">
