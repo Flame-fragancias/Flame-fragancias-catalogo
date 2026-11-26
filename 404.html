@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FLAME Fragancias</title>
+<script>
+  var p = location.pathname;
+  var viejo = "/Flame-fragancias-catalogo";
+  location.replace("/" + (p.indexOf(viejo) === 0 ? p.slice(viejo.length).replace(/^\//, "") : "") + location.search + location.hash);
+</script></head>
+<body style="font-family:sans-serif;background:#EFEEEA;padding:24px"><p><a href="/">Ir a FLAME Fragancias</a></p></body></html>
