@@ -20,10 +20,9 @@
   <meta property="og:site_name" content="FLAME Fragancias">
   <meta property="og:locale" content="es_AR">
   <link rel="icon" type="image/jpeg" href="img/favicon.jpeg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+  <link rel="preload" href="fuentes/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
   <style>
+    @font-face { font-family: "Bricolage Grotesque"; src: url("fuentes/bricolage-grotesque.woff2") format("woff2"); font-weight: 200 800; font-stretch: 75% 100%; font-display: swap; }
     :root {
       color-scheme: only light;
       --humo: #EFEEEA;
@@ -417,7 +416,14 @@
       .nav { display: none; }
       .bag-btn { margin-left: auto; }
       .hero-grid { grid-template-columns: 1fr; }
-      .hero-art { order: -1; aspect-ratio: 1.5; max-width: 460px; margin-inline: auto; width: 100%; }
+      .hero-art { aspect-ratio: 1.7; max-width: 440px; margin: 8px auto 0; width: 100%; }
+      .card-img .badges { left: 7px; top: 7px; gap: 4px; }
+      .card-img .badge { font-size: 11px; padding: 2px 7px; }
+      .bl { display: none; }
+      .f-img { aspect-ratio: 1.6; }
+      .sec-head { flex-wrap: wrap; align-items: flex-start; }
+      .xc img { aspect-ratio: 1.25; }
+      .facts { flex-direction: row; gap: 6px 14px; }
       .hero-bottles { inset: 4% 2%; }
       .fo-grid { grid-template-columns: repeat(2, 1fr); }
       .exp-nav { display: none; }
@@ -1357,7 +1363,7 @@
     const icoMas = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
     function tarjeta(p, extra = "") {
       const badges = p.out ? '<span class="badge badge-out">Sin stock</span>' : BF_ON
-        ? ['<span class="badge badge-bf">-5% CABA y GBA</span>', envioGratisBF(p) ? '<span class="badge badge-ship">Envío gratis</span>' : "", p.hot ? '<span class="badge badge-hot">Más pedido</span>' : ""].join("")
+        ? ['<span class="badge badge-bf">-5%<span class="bl"> CABA y GBA</span></span>', envioGratisBF(p) ? '<span class="badge badge-ship">Envío gratis</span>' : ""].join("")
         : [p.hot ? '<span class="badge badge-hot">Más pedido</span>' : "", p.nuevo ? '<span class="badge badge-new">Nuevo</span>' : ""].join("");
       const f = p.familias[0];
       const accion = p.out
