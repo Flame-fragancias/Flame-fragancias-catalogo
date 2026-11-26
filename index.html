@@ -166,6 +166,13 @@
     .bf-chip { margin: 0 0 16px; padding: 9px 14px; border-radius: 12px; background: var(--tinta); color: #FFB27A; font-weight: 600; font-size: 15px; width: fit-content; }
     body.bf .bf-chip { display: block; }
 
+    /* Barra de accesos */
+    .quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; max-width: 600px; }
+    .quick a { display: inline-flex; align-items: center; height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--linea-fuerte); background: var(--papel); text-decoration: none; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s; }
+    .quick a:hover { border-color: var(--tinta); }
+    .quick a.q-main { background: var(--azul); border-color: var(--azul); color: #fff; }
+    .quick a.q-main:hover { background: var(--azul-hondo); }
+
     /* Deslizá y descubrí */
     .explora { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px max(var(--gutter), calc((100vw - var(--max)) / 2)) 10px; scroll-padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2)); }
     .explora::-webkit-scrollbar { display: none; }
@@ -493,13 +500,16 @@
           <div>
             <p class="bf-only bf-chip">Black Friday hasta el lunes 30/11: 5% OFF en CABA y GBA y envío gratis desde $120.000</p>
             <h1>El arte de dejar huella</h1>
-            <p class="hero-sub">Perfumes árabes, de diseñador y nicho, sellados de fábrica. Decinos qué perfume te gusta y te mostramos los que se le parecen.</p>
-            <div class="finder">
-              <label for="finder-q">¿Qué perfume usás o te gusta?</label>
-              <input id="finder-q" type="search" placeholder="Ej: Sauvage, Khamrah o vainilla" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="finder-list" aria-autocomplete="list" enterkeyhint="search">
-              <ul id="finder-list" role="listbox" aria-label="Sugerencias" hidden></ul>
-              <div id="finder-out" aria-live="polite"></div>
-            </div>
+            <p class="hero-sub">Perfumes árabes, de diseñador y nicho, sellados de fábrica. Elegí por estilo, armá tu pedido y lo coordinamos por WhatsApp.</p>
+            <nav class="quick" aria-label="Accesos rápidos">
+              <a class="q-main" href="#catalogo">Ver catálogo</a>
+              <a href="#test">Encontrá tu perfume</a>
+              <a href="#como-comprar">Cómo comprar</a>
+              <a href="#envios">Envíos y pagos</a>
+              <a href="#mayorista">Mayorista</a>
+              <a href="#preguntas">Preguntas</a>
+              <a data-clic="hero-whatsapp" href="https://wa.me/541165955116?text=Hola!%20Vi%20la%20web%20y%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </nav>
             <ul class="facts"><li>Envío gratis en CABA y GBA</li><li>Sellados de fábrica</li><li>Te asesoramos por WhatsApp</li></ul>
           </div>
           <div class="hero-art" aria-hidden="true">
@@ -1406,31 +1416,6 @@
       const b = e.target.closest("[data-exp]"); if (!b) return;
       $("#explora").scrollBy({ left: Number(b.dataset.exp) * 354, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     });
-
-    /* Buscador: "¿qué perfume usás?" */
-    const fq = $("#finder-q"), fl = $("#finder-list"), fo = $("#finder-out");
-    const cerrarLista = () => { fl.hidden = true; fq.setAttribute("aria-expanded", "false"); };
-    fq.addEventListener("input", () => {
-      const q = norm(fq.value).trim();
-      if (q.length < 2) { cerrarLista(); return; }
-      const ws = q.split(/\s+/);
-      const porNombre = catalogo.filter((p) => ws.every((w) => norm(p.nombre + " " + p.marca).includes(w))).slice(0, 6);
-      const porNota = catalogo.filter((p) => !p.out && ws.every((w) => p.texto.includes(w))).length;
-      const items = porNombre.map((p) => `<li role="option"><button type="button" data-pick="${p.id}"><img src="${p.img}" data-fb="${p.imgOld}" alt=""><span><b>${esc(p.nombre)}</b><small>${esc(p.marca)}${p.out ? ", sin stock" : ""}</small></span></button></li>`);
-      if (porNota > porNombre.length) items.push(`<li><button type="button" class="nota" data-nota="${esc(fq.value.trim())}">Ver los ${porNota} perfumes con “${esc(fq.value.trim())}”</button></li>`);
-      if (!items.length) items.push(`<li class="nada">No lo encontramos en la web. <a data-clic="finder-sin-resultado" href="${wa(`Hola! Uso el ${fq.value.trim()}. ¿Qué me recomiendan parecido?`)}" target="_blank" rel="noopener noreferrer">Preguntanos por WhatsApp</a></li>`);
-      fl.innerHTML = items.join(""); fl.hidden = false; fq.setAttribute("aria-expanded", "true");
-    });
-    fq.addEventListener("keydown", (e) => { if (e.key === "Escape") cerrarLista(); if (e.key === "ArrowDown" && !fl.hidden) { e.preventDefault(); fl.querySelector("button")?.focus(); } });
-    fl.addEventListener("click", (e) => {
-      const pk = e.target.closest("[data-pick]"), nt = e.target.closest("[data-nota]");
-      if (pk) {
-        const p = porId[pk.dataset.pick]; fq.value = p.nombre; cerrarLista();
-        fo.innerHTML = `<p class="fo-t">Si te gusta ${esc(p.nombre)}, mirá estos:</p><div class="fo-grid">${[p, ...parecidos(p)].map((o) => `<button class="mini" type="button" data-open="${o.id}"><img src="${o.img}" data-fb="${o.imgOld}" alt="" width="200" height="200"><span>${esc(o.nombre)}</span><small>${o.out ? "Sin stock" : plata(BF_ON ? precioBF(o.precio) : o.precio)}</small></button>`).join("")}</div>`;
-      }
-      if (nt) { cerrarLista(); estado.q = nt.dataset.nota; $("#q").value = estado.q; pintarGrid(); $("#catalogo").scrollIntoView(); }
-    });
-    document.addEventListener("click", (e) => { if (!e.target.closest(".finder")) cerrarLista(); });
 
     /* Historias de clientes */
     let svI = 0, svT;
