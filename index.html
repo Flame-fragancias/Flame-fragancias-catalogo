@@ -6,15 +6,17 @@
   <meta name="theme-color" content="#EFEEEA">
   <meta name="description" content="Perfumes árabes, de diseñador y nicho, sellados de fábrica. Encontrá tu perfume por estilo, armá tu pedido y lo coordinamos por WhatsApp. Envío gratis en CABA y GBA.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FLAME Fragancias | Árabes, diseñador y nicho">
-  <meta property="og:description" content="Encontrá tu perfume por estilo y armá tu pedido por WhatsApp. Envío gratis en CABA y GBA.">
+  <meta property="og:title" content="FLAME Fragancias | El arte de dejar huella">
+  <meta property="og:description" content="Perfumes árabes, de diseñador y nicho, sellados de fábrica. Decinos qué perfume te gusta y te mostramos los que se le parecen. Envío gratis en CABA y GBA.">
   <meta property="og:url" content="https://flame-fragancias.github.io/Flame-fragancias-catalogo/">
-  <meta property="og:image" content="https://flame-fragancias.github.io/Flame-fragancias-catalogo/og-image.jpg">
+  <meta property="og:image" content="https://flame-fragancias.github.io/Flame-fragancias-catalogo/og-flame.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://flame-fragancias.github.io/Flame-fragancias-catalogo/">
-  <title>FLAME Fragancias | Árabes, diseñador y nicho</title>
+  <title>FLAME Fragancias | El arte de dejar huella</title>
+  <meta property="og:site_name" content="FLAME Fragancias">
+  <meta property="og:locale" content="es_AR">
   <link rel="icon" type="image/jpeg" href="img/favicon.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +91,14 @@
     .btn-tinta { background: var(--tinta); color: #fff; }
     .btn svg { width: 18px; height: 18px; }
 
-    .hero-bottles { position: relative; aspect-ratio: 1 / 1.02; }
+    .hero-art { position: relative; aspect-ratio: 1 / 1.02; }
+    .huella { position: absolute; left: -6%; top: -8%; width: 112%; height: 116%; overflow: visible; }
+    .huella path { fill: none; stroke-width: 3.4; stroke-linecap: round; opacity: .85; }
+    @media (prefers-reduced-motion: no-preference) {
+      .huella path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trazo 1.8s var(--ease) forwards; animation-delay: var(--d); }
+      @keyframes trazo { to { stroke-dashoffset: 0; } }
+    }
+    .hero-bottles { position: absolute; inset: 7%; }
     .hb { position: absolute; background: var(--foto); border-radius: 26px; overflow: hidden; box-shadow: 0 1px 0 var(--linea), 0 24px 48px -28px rgba(27, 26, 34, .35); text-decoration: none; }
     .hb img { width: 100%; height: 100%; object-fit: contain; padding: 4%; }
     .hb span { position: absolute; left: 12px; bottom: 10px; font-size: 13px; font-weight: 600; background: var(--humo); padding: 3px 9px; border-radius: 999px; }
@@ -104,24 +113,78 @@
     }
 
     /* Familias */
-    .familias { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: clamp(32px, 5vw, 56px); }
-    .fam { position: relative; text-align: left; border: 1px solid var(--linea); background: var(--papel); border-radius: var(--r-card); padding: 16px 16px 14px; overflow: hidden; transition: border-color .2s, transform .2s var(--ease); }
-    .fam::before { content: ""; position: absolute; inset: auto -30% -70% auto; width: 120px; height: 120px; border-radius: 50%; background: var(--c); opacity: .55; filter: blur(18px); transition: opacity .3s; }
-    .fam:hover { border-color: var(--linea-fuerte); transform: translateY(-2px); }
-    .fam:hover::before { opacity: .9; }
-    .fam b { position: relative; display: block; font-size: 21px; font-weight: 700; letter-spacing: -.02em; font-variation-settings: "opsz" 48; }
-    .fam small { position: relative; display: block; font-size: 14px; color: var(--grafito); margin-top: 2px; }
-    .fam em { position: relative; display: block; font-style: normal; font-size: 13px; margin-top: 12px; color: var(--tinta); }
+    .espectro-sec { padding-top: clamp(28px, 4vw, 44px); }
+    .mini-h { margin: 0 0 12px; font-size: 18px; font-weight: 700; letter-spacing: -.01em; }
+    .espectro { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+    .espectro::-webkit-scrollbar { display: none; }
+    .seg { flex: var(--n) 0 120px; min-height: 92px; border: 0; border-radius: 16px; background: var(--c); color: var(--tinta); text-align: left; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .25s var(--ease), filter .25s; }
+    .seg:hover { transform: translateY(-3px); filter: saturate(1.15); }
+    .seg b { font-size: 20px; font-weight: 700; letter-spacing: -.02em; font-variation-settings: "opsz" 48; }
+    .seg small { font-size: 13.5px; opacity: .8; }
 
-    /* Confianza */
-    .confianza { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
-    .confianza div { padding: 18px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
-    .confianza div + div { border-left: 1px solid var(--linea); }
-    .confianza svg { flex: none; width: 22px; height: 22px; color: var(--azul); margin-top: 1px; }
-    .confianza b { display: block; font-weight: 600; }
-    .confianza span { color: var(--grafito); font-size: 14px; }
+    /* Historias de clientes */
+    .stories-wrap { padding-top: 16px; }
+    .stories { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; }
+    .stories::-webkit-scrollbar { display: none; }
+    .st { flex: none; width: 74px; background: none; border: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12.5px; color: var(--grafito); }
+    .st span.ring { width: 70px; height: 70px; border-radius: 50%; padding: 3px; background: conic-gradient(from 200deg, var(--azul), var(--brasa), var(--f-floral), var(--azul)); }
+    .st img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--humo); }
+    .st em { font-style: normal; max-width: 74px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sv { position: fixed; inset: 0; z-index: 95; background: #0c0b10; display: none; align-items: center; justify-content: center; }
+    .sv.on { display: flex; }
+    .sv-in { position: relative; height: min(100dvh, 860px); aspect-ratio: 9 / 16; max-width: 100%; }
+    .sv-in img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+    .sv-bars { position: absolute; left: 10px; right: 10px; top: 10px; display: flex; gap: 4px; }
+    .sv-bars span { flex: 1; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .35); overflow: hidden; }
+    .sv-bars i { display: block; height: 100%; width: 0; background: #fff; }
+    .sv-bars .done i { width: 100%; }
+    .sv-bars .now i { animation: barra 5s linear forwards; }
+    @keyframes barra { to { width: 100%; } }
+    .sv-cap { position: absolute; left: 12px; right: 12px; bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #fff; font-weight: 600; text-shadow: 0 1px 8px rgba(0, 0, 0, .5); }
+    .sv-cap a { background: #fff; color: var(--tinta); text-shadow: none; padding: 8px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; }
+    .sv-x { position: absolute; right: 12px; top: 22px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0, 0, 0, .35); color: #fff; font-size: 22px; }
+    .sv-prev, .sv-next { position: absolute; top: 60px; bottom: 70px; width: 40%; background: none; border: 0; }
+    .sv-prev { left: 0; } .sv-next { right: 0; }
 
-    /* Secciones */
+    /* Buscador de parecidos */
+    .finder { margin-top: 26px; max-width: 520px; position: relative; }
+    .finder label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .finder input { width: 100%; height: 56px; border-radius: 16px; border: 1.5px solid var(--tinta); background: var(--papel); padding: 0 18px; font-size: 17px; }
+    .finder ul { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 6px); margin: 0; padding: 6px; list-style: none; background: var(--papel); border-radius: 16px; border: 1px solid var(--linea-fuerte); box-shadow: 0 24px 48px -24px rgba(27, 26, 34, .35); max-height: 340px; overflow-y: auto; }
+    .finder li button { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; background: none; border: 0; border-radius: 10px; padding: 8px; }
+    .finder li button:hover, .finder li button:focus-visible { background: var(--humo); }
+    .finder li img { width: 44px; height: 44px; object-fit: contain; background: var(--foto); border-radius: 10px; mix-blend-mode: multiply; }
+    .finder li b { display: block; font-size: 15.5px; } .finder li small { color: var(--grafito); font-size: 13.5px; }
+    .finder li.nada { padding: 10px; color: var(--grafito); }
+    .finder li .nota { color: var(--azul); font-weight: 600; padding: 12px 10px; }
+    .fo-t { margin: 18px 0 10px; font-weight: 600; }
+    .fo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .fo-grid .mini:first-child { outline: 2px solid var(--tinta); outline-offset: -2px; }
+    .facts { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14.5px; color: var(--grafito); }
+    .facts li { display: flex; align-items: center; gap: 7px; }
+    .facts li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--azul); }
+    .bf-chip { margin: 0 0 16px; padding: 9px 14px; border-radius: 12px; background: var(--tinta); color: #FFB27A; font-weight: 600; font-size: 15px; width: fit-content; }
+    body.bf .bf-chip { display: block; }
+
+    /* Deslizá y descubrí */
+    .explora { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px max(var(--gutter), calc((100vw - var(--max)) / 2)) 10px; scroll-padding-inline: max(var(--gutter), calc((100vw - var(--max)) / 2)); }
+    .explora::-webkit-scrollbar { display: none; }
+    .xc { flex: none; width: clamp(270px, 78vw, 340px); scroll-snap-align: start; border-radius: 26px; background: linear-gradient(180deg, color-mix(in srgb, var(--c) 45%, #fff) 0%, #fff 62%); border: 1px solid var(--linea); display: flex; flex-direction: column; overflow: hidden; }
+    .xc .xo { all: unset; cursor: pointer; display: block; padding: 18px 18px 0; }
+    .xc .xo:focus-visible { outline: 3px solid var(--azul); outline-offset: -3px; }
+    .xc .x-fam { font-size: 13.5px; font-weight: 600; }
+    .xc img { width: 100%; aspect-ratio: 1; object-fit: contain; mix-blend-mode: multiply; margin: 4px 0 6px; }
+    .xc .x-name { font-size: 26px; font-weight: 800; line-height: 1; letter-spacing: -.03em; font-variation-settings: "opsz" 96, "wdth" 85; }
+    .xc .x-brand { color: var(--grafito); font-size: 14px; margin-top: 4px; }
+    .xc dl { margin: 12px 0 0; display: grid; gap: 4px; font-size: 13.5px; }
+    .xc dl div { display: grid; grid-template-columns: 5em 1fr; gap: 8px; }
+    .xc dt { color: var(--grafito); } .xc dd { margin: 0; }
+    .xc .card-foot { margin-top: auto; padding: 14px 18px 18px; }
+    .exp-nav { display: flex; gap: 8px; }
+    .exp-nav button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--linea-fuerte); background: var(--papel); display: grid; place-items: center; }
+    .exp-nav svg { width: 18px; height: 18px; }
+
+    /* Secciones */    /* Secciones */
     .sec { padding: clamp(48px, 8vw, 96px) 0 0; }
     .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
     .sec-head h2 { margin: 0; font-weight: 800; font-size: clamp(34px, 5.4vw, 64px); line-height: .95; letter-spacing: -.035em; font-variation-settings: "opsz" 96, "wdth" 80; }
@@ -262,7 +325,7 @@
     /* Footer */
     .footer { margin-top: clamp(56px, 9vw, 110px); background: var(--tinta); color: #fff; padding: 48px 0 calc(32px + env(safe-area-inset-bottom)); }
     .footer-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: end; }
-    .footer-big { font-weight: 800; font-size: clamp(44px, 8vw, 96px); line-height: .9; letter-spacing: -.045em; font-variation-settings: "opsz" 96, "wdth" 76; margin: 0; }
+    .footer-big { font-weight: 800; font-size: clamp(40px, 7vw, 88px); line-height: .9; letter-spacing: -.045em; font-variation-settings: "opsz" 96, "wdth" 76; margin: 0; }
     .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
     .footer-links a { border: 1px solid rgba(255, 255, 255, .25); border-radius: 999px; padding: 10px 16px; text-decoration: none; }
     .footer small { display: block; margin-top: 28px; color: rgba(255, 255, 255, .5); font-size: 13px; }
@@ -338,24 +401,21 @@
 
     @media (max-width: 1000px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
-      .familias { grid-template-columns: repeat(3, 1fr); }
-      .confianza { grid-template-columns: repeat(2, 1fr); }
-      .confianza div:nth-child(3) { border-left: 0; }
-      .confianza div:nth-child(n+3) { border-top: 1px solid var(--linea); }
       .test-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       .nav { display: none; }
       .bag-btn { margin-left: auto; }
       .hero-grid { grid-template-columns: 1fr; }
-      .hero-bottles { order: -1; aspect-ratio: 1.5; max-width: 460px; }
+      .hero-art { order: -1; aspect-ratio: 1.5; max-width: 460px; margin-inline: auto; width: 100%; }
+      .hero-bottles { inset: 4% 2%; }
+      .fo-grid { grid-template-columns: repeat(2, 1fr); }
+      .exp-nav { display: none; }
       .hb-1 { width: 46%; height: 92%; top: 4%; }
       .hb-2 { width: 34%; height: 60%; right: 18%; top: 0; }
       .hb-3 { width: 30%; height: 54%; right: 0; bottom: 0; }
       .hb-2 { right: 21%; }
       .hb span { display: none; }
-      .familias { grid-template-columns: repeat(2, 1fr); }
-      .familias .fam:last-child { grid-column: 1 / -1; }
       .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .card-body { padding: 10px 11px 0; }
       .card-name { font-size: 15.5px; }
@@ -425,53 +485,52 @@
   </header>
 
   <main id="top">
+    <div class="wrap stories-wrap"><nav class="stories" id="stories" aria-label="Historias de clientes"></nav></div>
+
     <section class="hero">
       <div class="wrap">
         <div class="hero-grid">
           <div>
-            <h1 id="hero-h1">¿A qué querés oler?</h1>
-            <p class="hero-sub" id="hero-sub">Perfumes árabes, de diseñador y nicho, sellados de fábrica. Elegí por estilo, armá tu pedido y lo coordinamos por WhatsApp.</p>
-            <div class="hero-actions">
-              <a class="btn btn-azul" id="cta-1" href="#test">Hacé el test: 4 preguntas</a>
-              <a class="btn btn-borde" id="cta-2" href="#catalogo">Ver el catálogo</a>
+            <p class="bf-only bf-chip">Black Friday hasta el lunes 30/11: 5% OFF en CABA y GBA y envío gratis desde $120.000</p>
+            <h1>El arte de dejar huella</h1>
+            <p class="hero-sub">Perfumes árabes, de diseñador y nicho, sellados de fábrica. Decinos qué perfume te gusta y te mostramos los que se le parecen.</p>
+            <div class="finder">
+              <label for="finder-q">¿Qué perfume usás o te gusta?</label>
+              <input id="finder-q" type="search" placeholder="Ej: Sauvage, Khamrah o vainilla" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="finder-list" aria-autocomplete="list" enterkeyhint="search">
+              <ul id="finder-list" role="listbox" aria-label="Sugerencias" hidden></ul>
+              <div id="finder-out" aria-live="polite"></div>
             </div>
+            <ul class="facts"><li>Envío gratis en CABA y GBA</li><li>Sellados de fábrica</li><li>Te asesoramos por WhatsApp</li></ul>
           </div>
-          <div class="hero-bottles" id="hero-bottles"></div>
+          <div class="hero-art" aria-hidden="true">
+            <svg class="huella" id="huella" viewBox="-170 -200 340 400"></svg>
+            <div class="hero-bottles" id="hero-bottles"></div>
+          </div>
         </div>
-        <div class="familias" id="familias" aria-label="Elegí por estilo"></div>
       </div>
     </section>
 
-    <div class="wrap confianza">
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><p style="margin:0"><b>Sellados de fábrica</b><span>Caja cerrada, sin decants</span></p></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><p style="margin:0"><b>Envío gratis CABA y GBA</b><span>Pedí antes de las 13 h y llega hoy</span></p></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.1 11.7a8.1 8.1 0 0 1-12 7.1L3 20l1.3-4.8a8.1 8.1 0 1 1 15.8-3.5Z"/></svg><p style="margin:0"><b>Te asesoramos</b><span>Por WhatsApp, antes de pagar</span></p></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg><p style="margin:0"><b>A todo el país</b><span>Con número de seguimiento</span></p></div>
-    </div>
-
-    <section class="sec" aria-labelledby="hot-title">
+    <section class="espectro-sec" aria-labelledby="esp-title">
       <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <h2 id="hot-title">Los más pedidos</h2>
-            <p>Los que más salen esta temporada.</p>
-          </div>
-        </div>
-        <div class="rail" id="rail"></div>
+        <h2 class="mini-h" id="esp-title">Elegí por estilo</h2>
+        <div class="espectro" id="familias"></div>
       </div>
     </section>
 
-    <section class="sec" id="clientes" aria-labelledby="cli-title">
+    <section class="sec" aria-labelledby="exp-title">
       <div class="wrap">
         <div class="sec-head">
           <div>
-            <h2 id="cli-title">Ya les llegó</h2>
-            <p>Fotos e historias que nos mandan nuestros clientes.</p>
+            <h2 id="exp-title">Deslizá y descubrí</h2>
+            <p>Los más pedidos y lo nuevo, de a uno.</p>
           </div>
-          <a class="link-ig" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4NDE4OTIwNDE4MTQ4NjU5" target="_blank" rel="noopener noreferrer">Ver más en Instagram</a>
+          <div class="exp-nav">
+            <button type="button" data-exp="-1" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" data-exp="1" aria-label="Ver siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
         </div>
-        <div class="rail clientes" id="clientes-rail"></div>
       </div>
+      <div class="explora" id="explora"></div>
     </section>
 
     <section class="sec" id="catalogo" aria-labelledby="cat-title">
@@ -574,7 +633,7 @@
   <footer class="footer">
     <div class="wrap">
       <div class="footer-in">
-        <p class="footer-big">FLAME<br>Fragancias</p>
+        <div><p class="footer-big">El arte de<br>dejar huella</p><p style="margin:10px 0 0;color:rgba(255,255,255,.6)">FLAME Fragancias</p></div>
         <nav class="footer-links" aria-label="Redes y contacto">
           <a href="https://www.instagram.com/flame.fragancias" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.tiktok.com/@flame.fragancias" target="_blank" rel="noopener noreferrer">TikTok</a>
@@ -598,6 +657,16 @@
   </aside>
   <button class="mbar" id="mbar" type="button"><span><small id="mbar-n"></small><b id="mbar-t"></b></span><span class="go">Ver pedido</span></button>
   <div class="toast" id="toast" role="status"></div>
+  <div class="sv" id="sv" role="dialog" aria-modal="true" aria-label="Historias de clientes">
+    <div class="sv-in">
+      <div class="sv-bars" id="sv-bars"></div>
+      <img id="sv-img" alt="">
+      <button class="sv-prev" type="button" data-sv="-1" aria-label="Historia anterior"></button>
+      <button class="sv-next" type="button" data-sv="1" aria-label="Historia siguiente"></button>
+      <button class="sv-x" type="button" data-sv="x" aria-label="Cerrar historias">×</button>
+      <div class="sv-cap"><span id="sv-cap"></span><a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4NDE4OTIwNDE4MTQ4NjU5" target="_blank" rel="noopener noreferrer">Ver en Instagram</a></div>
+    </div>
+  </div>
 
   <script>
     const notasPorFragancia = {
@@ -1297,13 +1366,85 @@
 
     /* ───────── Hero, familias, rail ───────── */
     const heroIds = ["Khamrah", "Dior Sauvage EDP", "9 PM Rebel"].map((n) => catalogo.find((p) => p.nombre === n)).filter(Boolean);
-    $("#hero-bottles").innerHTML = heroIds.map((p, k) => `<a class="hb hb-${k + 1}" href="#perfume/${p.id}" aria-label="Ver ${esc(p.nombre)}"><img src="${p.img}" data-fb="${p.imgOld}" alt="" width="500" height="500"><span>${esc(p.nombre)}</span></a>`).join("");
+    $("#hero-bottles").innerHTML = heroIds.map((p, k) => `<a class="hb hb-${k + 1}" tabindex="-1" href="#perfume/${p.id}" aria-label="Ver ${esc(p.nombre)}"><img src="${p.img}" data-fb="${p.imgOld}" alt="" width="500" height="500"><span>${esc(p.nombre)}</span></a>`).join("");
     $("#familias").innerHTML = Object.entries(FAMILIAS).map(([f, d]) => {
       const n = catalogo.filter((p) => !p.out && p.familias.includes(f)).length;
-      return `<button class="fam" type="button" data-fam="${f}" style="--c:${d.c}"><b>${f}</b><small>${d.notas}</small><em>${n} perfumes</em></button>`;
+      return `<button class="seg" type="button" data-fam="${f}" style="--c:${d.c};--n:${n}"><b>${f}</b><small>${d.notas}. ${n} perfumes</small></button>`;
     }).join("");
-    const rail = MAS_PEDIDOS.map((n) => catalogo.find((p) => p.nombre === n)).filter((p) => p && !p.out);
-    $("#rail").innerHTML = rail.map((p) => tarjeta(p)).join("");
+
+    /* Huella: líneas tipo huella digital con los colores de cada familia */
+    (function () {
+      const cols = Object.values(FAMILIAS).map((d) => d.c);
+      let html = "";
+      for (let i = 0; i < 17; i++) {
+        const rx = 14 + i * 9, ry = 18 + i * 10.6;
+        const hueco = 0.35 + ((i * 47) % 70) / 100;
+        const a0 = (i * 61) % 360 * Math.PI / 180, a1 = a0 + Math.PI * 2 - hueco;
+        let d = "";
+        for (let a = a0; a <= a1; a += 0.06) {
+          const w = 1 + 0.035 * Math.sin(3 * a + i);
+          d += (d ? "L" : "M") + (rx * Math.cos(a) * w).toFixed(1) + " " + (ry * Math.sin(a) * w).toFixed(1);
+        }
+        html += `<path d="${d}" pathLength="1" style="stroke:${cols[i % cols.length]};--d:${i * 70}ms"/>`;
+      }
+      $("#huella").innerHTML = html;
+    })();
+
+    /* Deslizá y descubrí */
+    const explora = [...new Set([...MAS_PEDIDOS, ...NUEVOS])].map((n) => catalogo.find((p) => p.nombre === n)).filter((p) => p && !p.out);
+    const corta = (txt) => String(txt).split(",").slice(0, 2).join(",");
+    $("#explora").innerHTML = explora.map((p) => `<article class="xc" style="--c:${FAMILIAS[p.familias[0]].c}">
+        <button class="xo" type="button" data-open="${p.id}" aria-label="Ver ficha de ${esc(p.nombre)}">
+          <span class="x-fam">${p.familias.join(" y ").toLowerCase().replace(/^./, (c) => c.toUpperCase())}${p.hot ? ", de los más pedidos" : p.nuevo ? ", nuevo" : ""}</span>
+          <img src="${p.img}" data-fb="${p.imgOld}" alt="${esc(p.nombre)} de ${esc(p.marca)}" loading="lazy" width="400" height="400">
+          <div class="x-name">${esc(p.nombre)}</div><div class="x-brand">${esc(p.marca)}${p.duracion ? ", dura " + p.duracion : ""}</div>
+          ${p.notas ? `<dl>${Object.entries(p.notas).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(corta(v))}</dd></div>`).join("")}</dl>` : ""}
+        </button>
+        <div class="card-foot">${BF_ON ? `<span class="price-wrap"><span class="price">${plata(precioBF(p.precio))}</span><small class="price-note">CABA y GBA. Resto: ${plata(p.precio)}</small></span>` : `<span class="price">${plata(p.precio)}</span>`}<button class="add" type="button" data-add="${p.id}" aria-label="Agregar ${esc(p.nombre)} al pedido">${icoMas}Agregar</button></div>
+      </article>`).join("");
+    document.querySelector(".exp-nav").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-exp]"); if (!b) return;
+      $("#explora").scrollBy({ left: Number(b.dataset.exp) * 354, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+
+    /* Buscador: "¿qué perfume usás?" */
+    const fq = $("#finder-q"), fl = $("#finder-list"), fo = $("#finder-out");
+    const cerrarLista = () => { fl.hidden = true; fq.setAttribute("aria-expanded", "false"); };
+    fq.addEventListener("input", () => {
+      const q = norm(fq.value).trim();
+      if (q.length < 2) { cerrarLista(); return; }
+      const ws = q.split(/\s+/);
+      const porNombre = catalogo.filter((p) => ws.every((w) => norm(p.nombre + " " + p.marca).includes(w))).slice(0, 6);
+      const porNota = catalogo.filter((p) => !p.out && ws.every((w) => p.texto.includes(w))).length;
+      const items = porNombre.map((p) => `<li role="option"><button type="button" data-pick="${p.id}"><img src="${p.img}" data-fb="${p.imgOld}" alt=""><span><b>${esc(p.nombre)}</b><small>${esc(p.marca)}${p.out ? ", sin stock" : ""}</small></span></button></li>`);
+      if (porNota > porNombre.length) items.push(`<li><button type="button" class="nota" data-nota="${esc(fq.value.trim())}">Ver los ${porNota} perfumes con “${esc(fq.value.trim())}”</button></li>`);
+      if (!items.length) items.push(`<li class="nada">No lo encontramos en la web. <a data-clic="finder-sin-resultado" href="${wa(`Hola! Uso el ${fq.value.trim()}. ¿Qué me recomiendan parecido?`)}" target="_blank" rel="noopener noreferrer">Preguntanos por WhatsApp</a></li>`);
+      fl.innerHTML = items.join(""); fl.hidden = false; fq.setAttribute("aria-expanded", "true");
+    });
+    fq.addEventListener("keydown", (e) => { if (e.key === "Escape") cerrarLista(); if (e.key === "ArrowDown" && !fl.hidden) { e.preventDefault(); fl.querySelector("button")?.focus(); } });
+    fl.addEventListener("click", (e) => {
+      const pk = e.target.closest("[data-pick]"), nt = e.target.closest("[data-nota]");
+      if (pk) {
+        const p = porId[pk.dataset.pick]; fq.value = p.nombre; cerrarLista();
+        fo.innerHTML = `<p class="fo-t">Si te gusta ${esc(p.nombre)}, mirá estos:</p><div class="fo-grid">${[p, ...parecidos(p)].map((o) => `<button class="mini" type="button" data-open="${o.id}"><img src="${o.img}" data-fb="${o.imgOld}" alt="" width="200" height="200"><span>${esc(o.nombre)}</span><small>${o.out ? "Sin stock" : plata(BF_ON ? precioBF(o.precio) : o.precio)}</small></button>`).join("")}</div>`;
+      }
+      if (nt) { cerrarLista(); estado.q = nt.dataset.nota; $("#q").value = estado.q; pintarGrid(); $("#catalogo").scrollIntoView(); }
+    });
+    document.addEventListener("click", (e) => { if (!e.target.closest(".finder")) cerrarLista(); });
+
+    /* Historias de clientes */
+    let svI = 0, svT;
+    $("#stories").innerHTML = CLIENTES.map((c, k) => `<button class="st" type="button" data-st="${k}"><span class="ring"><img src="${BASE_IMG + c.foto}" alt="" width="64" height="64"></span><em>${esc(c.texto)}</em></button>`).join("");
+    function verHistoria(k) {
+      if (k < 0 || k >= CLIENTES.length) { $("#sv").classList.remove("on"); document.body.classList.remove("is-locked"); clearTimeout(svT); return; }
+      svI = k; $("#sv-img").src = BASE_IMG + CLIENTES[k].foto; $("#sv-img").alt = "Historia de cliente: " + CLIENTES[k].texto; $("#sv-cap").textContent = CLIENTES[k].texto;
+      $("#sv-bars").innerHTML = CLIENTES.map((_, j) => `<span class="${j < k ? "done" : j === k ? "now" : ""}"><i></i></span>`).join("");
+      $("#sv").classList.add("on"); document.body.classList.add("is-locked");
+      clearTimeout(svT); svT = setTimeout(() => verHistoria(svI + 1), 5000);
+    }
+    $("#stories").addEventListener("click", (e) => { const b = e.target.closest("[data-st]"); if (b) verHistoria(Number(b.dataset.st)); });
+    $("#sv").addEventListener("click", (e) => { const b = e.target.closest("[data-sv]"); if (!b) return; if (b.dataset.sv === "x") verHistoria(-1); else verHistoria(svI + Number(b.dataset.sv)); });
+    document.addEventListener("keydown", (e) => { if ($("#sv").classList.contains("on")) { if (e.key === "Escape") verHistoria(-1); if (e.key === "ArrowRight") verHistoria(svI + 1); if (e.key === "ArrowLeft") verHistoria(svI - 1); } });
 
     /* ───────── Filtros ───────── */
     const estado = { q: "", envio: null, origen: null, para: null, familia: null, orden: "dest" };
@@ -1525,14 +1666,9 @@
     function rutaHash() { const m = location.hash.match(/^#perfume\/(.+)$/); if (m && porId[m[1]]) ficha(m[1]); }
     window.addEventListener("hashchange", rutaHash);
 
-    $("#clientes-rail").innerHTML = CLIENTES.map((c) => `<figure class="cli"><img src="${BASE_IMG + c.foto}" alt="Foto de un cliente: ${esc(c.texto)}" loading="lazy" width="720" height="1280"><figcaption>${esc(c.texto)}</figcaption></figure>`).join("");
     if (BF_ON) {
       document.body.classList.add("bf");
       $("#topbar").innerHTML = "<strong>Black Friday hasta el lunes 30/11:</strong> 5% OFF en CABA y GBA y envío gratis a todo el país desde $120.000.";
-      $("#hero-h1").textContent = "Black Friday en FLAME";
-      $("#hero-sub").textContent = "Hasta el lunes 30/11: 5% OFF en CABA y GBA y envío gratis a todo el país en perfumes desde $120.000. Elegí, armá tu pedido y lo coordinamos por WhatsApp.";
-      $("#cta-1").textContent = "Ver los precios"; $("#cta-1").href = "#catalogo";
-      $("#cta-2").textContent = "Hacé el test: 4 preguntas"; $("#cta-2").href = "#test";
       $("#rows-envio").insertAdjacentHTML("afterbegin", "<div><dt>Black Friday</dt><dd>Del 27 al 30/11: 5% OFF en CABA y GBA y envío gratis a todo el país en perfumes desde $120.000.</dd></div>");
     }
     pintarGrid(); pintarQuiz(); pintarPedido(); rutaHash();
