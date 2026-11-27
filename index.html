@@ -474,7 +474,13 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
     }
-  </style>
+      .sello{padding:18px 0 6px}
+    .sello-in{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--linea-fuerte);border-radius:14px;padding:16px 18px;background:#fff;max-width:760px}
+    .sello-ic{width:40px;height:40px;flex:none}
+    .sello h2{margin:0 0 4px;font-size:1.05rem;line-height:1.25}
+    .sello p{margin:0;font-size:.92rem;line-height:1.5;max-width:68ch}
+    .sello a{color:inherit;text-decoration:underline}
+</style>
   <!-- Metricool: visitas a la web -->
   <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"d4c0d21e87fb36fc316f8dac40026d93"})});</script>
   <!-- Clics en botones de WhatsApp: se registran en Metricool (páginas "?clic=...") y en el Pixel de Meta si está instalado -->
@@ -542,6 +548,16 @@
             <svg class="huella" id="huella" viewBox="-170 -200 340 400"></svg>
             <div class="hero-bottles" id="hero-bottles"></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sello" aria-labelledby="sello-title">
+      <div class="wrap sello-in">
+        <svg class="sello-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="14" width="28" height="28" rx="3"/><path d="M18 14v-4h12v4M17 26l5 5 9-10"/></svg>
+        <div>
+          <h2 id="sello-title">Llega cerrado, como sale de fábrica</h2>
+          <p>Cada perfume viene sellado en su caja, con el código de lote impreso. Con ese código podés consultar cuándo se fabricó en <a href="https://www.checkfresh.com/" target="_blank" rel="noopener">CheckFresh</a> (en las marcas que figuran ahí). Nada de decants ni frascos abiertos: lo abrís vos.</p>
         </div>
       </div>
     </section>
