@@ -1570,7 +1570,7 @@
     const precioPedido = (p) => { const m = tasaMayorista(p), b = conDescuento() ? BF.descuento : 0; return m > b ? Math.round(p.precio * (1 - m) / 100) * 100 : b ? precioBF(p.precio) : p.precio; };
     const subtotal = () => Object.entries(pedido).reduce((a, [id, n]) => a + porId[id].precio * n, 0);
     const total = () => Object.entries(pedido).reduce((a, [id, n]) => a + precioPedido(porId[id]) * n, 0);
-    const envioGratisPedido = () => zona === "CABA" || zona === "GBA" || (BF_ON && Object.keys(pedido).some((id) => envioGratisBF(porId[id])));
+    const envioGratisPedido = () => zona === "CABA" || zona === "GBA" || (BF_ON && total() >= BF.envioGratisDesde);
     function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 1800); }
     function agregar(id, boton) {
       pedido[id] = (pedido[id] || 0) + 1; guardar("flame-pedido", pedido); pintarPedido();
@@ -1604,7 +1604,7 @@
         </div>`; }).join("") +
         `<div class="zona"><label for="zona">¿A dónde lo enviamos?</label>
           <select id="zona"><option value="">Elegí tu zona</option>${["CABA", "GBA", "Interior del país", "Patagonia"].map((z) => `<option ${z === zona ? "selected" : ""}>${z}</option>`).join("")}</select>
-          <p>${!zona ? (BF_ON ? "Elegí tu zona: en CABA y GBA tenés 5% OFF por Black Friday." : "En CABA y GBA el envío es gratis.") : envioGratisPedido() ? "Envío gratis." : `El envío lo calculamos según tu ciudad (desde $15.000) y te lo pasamos por WhatsApp.${BF_ON ? " Con un perfume desde $120.000, el envío es gratis." : ""}`}</p></div>
+          <p>${!zona ? (BF_ON ? "Elegí tu zona: en CABA y GBA tenés 5% OFF por Black Friday." : "En CABA y GBA el envío es gratis.") : envioGratisPedido() ? "Envío gratis." : `El envío lo calculamos según tu ciudad (desde $15.000) y te lo pasamos por WhatsApp.${BF_ON ? ` Si tu pedido llega a $120.000, el envío es gratis (te faltan ${plata(Math.max(0, BF.envioGratisDesde - total()))}).` : ""}`}</p></div>
         ${(zona || hayMayorista()) ? `<div class="resumen">${subtotal() > total() ? `<div><span>Subtotal</span><span>${plata(subtotal())}</span></div><div class="ok"><span>${hayMayorista() ? "Descuento mayorista" : "Black Friday 5% OFF"}</span><span>−${plata(subtotal() - total())}</span></div>` : ""}${zona ? `<div${envioGratisPedido() ? ' class="ok"' : ""}><span>Envío</span><span>${envioGratisPedido() ? "Gratis" : "A calcular"}</span></div>` : ""}</div>` : ""}
         ${unidades() >= 3 && unidades() < 6 ? `<p class="mayo-hint">Sumá ${6 - unidades()} ${6 - unidades() === 1 ? "perfume más" : "perfumes más"} y tenés precio mayorista.</p>` : unidades() >= 6 && unidades() < 12 ? `<p class="mayo-hint">Con ${12 - unidades()} más, los árabes pasan a 10% OFF.</p>` : ""}`;
       $("#pedido-foot").innerHTML = `<div class="total"><span>Total (${n} ${n === 1 ? "perfume" : "perfumes"})</span><b>${plata(total())}</b></div>
@@ -1735,7 +1735,7 @@
     if (BF_ON) {
       document.body.classList.add("bf");
       $("#topbar").innerHTML = "<strong>Black Friday hasta el lunes 30/11:</strong> 5% OFF en CABA y GBA y envío gratis a todo el país desde $120.000.";
-      $("#rows-envio").insertAdjacentHTML("afterbegin", "<div><dt>Black Friday</dt><dd>Del 27 al 30/11: 5% OFF en CABA y GBA y envío gratis a todo el país en perfumes desde $120.000.</dd></div>");
+      $("#rows-envio").insertAdjacentHTML("afterbegin", "<div><dt>Black Friday</dt><dd>Del 27 al 30/11: 5% OFF en CABA y GBA y envío gratis a todo el país en compras desde $120.000.</dd></div>");
     }
     pintarGrid(); pintarQuiz(); pintarPedido(); rutaHash();
   </script>
