@@ -706,6 +706,17 @@
 
   <script>
     const notasPorFragancia = {
+      "Light Blue Pour Homme": { Salida: "Pomelo, bergamota, enebro", Corazón: "Pimienta, romero, palo de rosa", Fondo: "Almizcle, incienso, musgo de roble" },
+      "The One EDP": { Salida: "Pomelo, cilantro, albahaca", Corazón: "Jengibre, cardamomo, azahar", Fondo: "Tabaco, ámbar, cedro" },
+      "Stronger With You EDT": { Salida: "Cardamomo, pimienta rosa, menta", Corazón: "Salvia, melón", Fondo: "Castaña, vainilla, cedro" },
+      "Spicebomb EDT (90 ml)": { Salida: "Bergamota, pomelo, pimienta rosa", Corazón: "Canela, azafrán, pimentón", Fondo: "Tabaco, cuero, vetiver" },
+      "Phantom EDT": { Salida: "Limón, lavanda", Corazón: "Manzana, pachulí", Fondo: "Vainilla, vetiver" },
+      "Armani Code EDT (125 ml)": { Salida: "Bergamota, limón", Corazón: "Anís estrellado, olivo, azahar", Fondo: "Haba tonka, cuero, tabaco" },
+      "La Bomba EDP (80 ml)": { Salida: "Pitahaya", Corazón: "Peonía, frangipani", Fondo: "Vainilla" },
+      "Light Blue Mujer EDT": { Salida: "Limón siciliano, manzana, cedro", Corazón: "Bambú, jazmín, rosa blanca", Fondo: "Cedro, ámbar, almizcle" },
+      "Angel EDP": { Salida: "Bergamota, algodón de azúcar, melón", Corazón: "Miel, frutos rojos, jazmín", Fondo: "Pachulí, chocolate, caramelo, vainilla" },
+      "Ange ou Démon EDP": { Salida: "Mandarina, azafrán", Corazón: "Lirio, ylang-ylang, orquídea", Fondo: "Vainilla, haba tonka, maderas" },
+      "Dior Addict EDP": { Salida: "Hoja de mora, mandarina", Corazón: "Azahar, jazmín, rosa", Fondo: "Vainilla de Bourbon, sándalo, haba tonka" },
       "Dior Sauvage EDP": { Salida: "Bergamota, pimienta", Corazón: "Lavanda, anís estrellado", Fondo: "Vainilla, ambroxan, notas amaderadas" },
       "Dior Pour Homme Intense": { Salida: "Lavanda", Corazón: "Iris, ambreta", Fondo: "Cedro de Virginia, vetiver, notas amaderadas" },
       "Dior Sauvage Elixir (100 ml)": { Salida: "Canela, nuez moscada, cardamomo", Corazón: "Lavanda, regaliz", Fondo: "Sándalo, ámbar, pachuli" },
@@ -933,6 +944,17 @@
 
     // Duración estimada según reseñas de sitios de perfumería (rangos, no mediciones). Sin dato confiable → "Consultá".
     const duracionEstimada = {
+      "Light Blue Pour Homme": "6–8 h",
+      "The One EDP": "6–8 h",
+      "Stronger With You EDT": "6–8 h",
+      "Spicebomb EDT (90 ml)": "7–9 h",
+      "Phantom EDT": "6–8 h",
+      "Armani Code EDT (125 ml)": "6–8 h",
+      "La Bomba EDP (80 ml)": "7–9 h",
+      "Light Blue Mujer EDT": "5–7 h",
+      "Angel EDP": "10–12 h",
+      "Ange ou Démon EDP": "7–9 h",
+      "Dior Addict EDP": "7–9 h",
       "Dior Sauvage EDP": "6–10 h",
       "Dior Pour Homme Intense": "6–10 h",
       "Dior Sauvage Elixir (100 ml)": "6–10 h",
@@ -1043,6 +1065,17 @@
     const sinStock = ["Soleil Blanc EDP", "Aventus Absolu", "Stronger With You Intensely", "Amber Oud Gold Edition", "Aventus", "My Way (Sunny Vanilla EDP)", "Art of Universe", "Baccarat Rouge 540 tester", "Acqua Di Gioia EDP", "Bad Boy Le Parfum", "Acqua Di Gio Profondo EDP (125 ml)", "Burberry Her EDP", "Veneno Negro", "Dior Pour Homme Intense", "Black Orchid EDP", "Chanel Chance EDT", "Versace Dylan Blue (200 ml)"];
 
     const perfumes = [
+      { nombre: "Light Blue Pour Homme", marca: "Dolce & Gabbana", categoria: "Diseñador", precio: 159900 },
+      { nombre: "The One EDP", marca: "Dolce & Gabbana", categoria: "Diseñador", precio: 159900 },
+      { nombre: "Stronger With You EDT", marca: "Giorgio Armani", categoria: "Diseñador", precio: 231900 },
+      { nombre: "Spicebomb EDT (90 ml)", marca: "Viktor & Rolf", categoria: "Diseñador", precio: 169900 },
+      { nombre: "Phantom EDT", marca: "Paco Rabanne", categoria: "Diseñador", precio: 191900 },
+      { nombre: "Armani Code EDT (125 ml)", marca: "Giorgio Armani", categoria: "Diseñador", precio: 221900 },
+      { nombre: "La Bomba EDP (80 ml)", marca: "Carolina Herrera", categoria: "Femenino", precio: 245900 },
+      { nombre: "Light Blue Mujer EDT", marca: "Dolce & Gabbana", categoria: "Femenino", precio: 179900 },
+      { nombre: "Angel EDP", marca: "Mugler", categoria: "Femenino", precio: 219900 },
+      { nombre: "Ange ou Démon EDP", marca: "Givenchy", categoria: "Femenino", precio: 231900 },
+      { nombre: "Dior Addict EDP", marca: "Dior", categoria: "Femenino", precio: 228900 },
       { nombre: "Dior Sauvage EDP", marca: "Dior", categoria: "Diseñador", precio: 250000 },
       { nombre: "Dior Pour Homme Intense", marca: "Dior", categoria: "Diseñador", precio: 285000 },
       { nombre: "Dior Sauvage Elixir (100 ml)", marca: "Dior", categoria: "Diseñador", precio: 440000 },
@@ -1168,8 +1201,9 @@
       "Red Tobacco (120 ml)": "Unisex", "Ani": "Unisex", "Intense Café": "Unisex", "CK One (200 ml, unisex)": "Unisex"
     };
     const MAS_PEDIDOS = ["Khamrah", "9 PM Rebel", "Dior Sauvage EDP", "Invictus EDT", "Asad Bourbon", "Yara Pink", "Club de Nuit Untold", "Erba Pura"];
-    const NUEVOS = ["Club de Nuit Untold", "Centaurus", "Delphinus", "Boss Bottled EDP", "Stronger With You Parfum", "Alien EDP (90 ml)"];
+    const NUEVOS = ["Light Blue Pour Homme", "The One EDP", "Stronger With You EDT", "Spicebomb EDT (90 ml)", "Phantom EDT", "Armani Code EDT (125 ml)", "La Bomba EDP (80 ml)", "Light Blue Mujer EDT", "Angel EDP", "Ange ou Démon EDP", "Dior Addict EDP", "Club de Nuit Untold", "Centaurus", "Delphinus"];
     const FAMILIA_MANUAL = {
+      "Light Blue Pour Homme": ["Fresco"], "The One EDP": ["Especiado", "Dulce"], "Stronger With You EDT": ["Dulce", "Especiado"], "Spicebomb EDT (90 ml)": ["Especiado", "Amaderado"], "Phantom EDT": ["Fresco", "Dulce"], "Armani Code EDT (125 ml)": ["Especiado", "Dulce"], "La Bomba EDP (80 ml)": ["Dulce", "Floral"], "Light Blue Mujer EDT": ["Fresco", "Floral"], "Angel EDP": ["Dulce"], "Ange ou Démon EDP": ["Floral", "Dulce"], "Dior Addict EDP": ["Dulce", "Floral"],
       "Dior Sauvage EDP": ["Fresco", "Especiado"],
       "Dior Pour Homme Intense": ["Amaderado", "Floral"],
       "Dior Sauvage Elixir (100 ml)": ["Especiado", "Amaderado"],
