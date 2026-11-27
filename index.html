@@ -93,6 +93,8 @@
     .btn-tinta { background: var(--tinta); color: #fff; }
     .btn svg { width: 18px; height: 18px; }
 
+    .hero-grid > * { min-width: 0; }
+    .hero { overflow-x: clip; }
     .hero-art { position: relative; aspect-ratio: 1 / 1.02; }
     .huella { position: absolute; left: -6%; top: -8%; width: 112%; height: 116%; overflow: visible; }
     .huella path { fill: none; stroke-width: 3.4; stroke-linecap: round; opacity: .85; }
@@ -167,6 +169,11 @@
     .facts li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--azul); }
     .bf-chip { margin: 0 0 16px; padding: 9px 14px; border-radius: 12px; background: var(--tinta); color: #FFB27A; font-weight: 600; font-size: 15px; width: fit-content; }
     body.bf .bf-chip { display: block; }
+
+    .mas-wrap { grid-column: 1 / -1; display: flex; justify-content: center; padding: 10px 0; }
+    .wa-float { position: fixed; z-index: 45; right: 14px; bottom: calc(16px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 8px; background: #1FAF54; color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 16px 12px 12px; border-radius: 999px; box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .45); transition: bottom .25s var(--ease); }
+    .wa-float svg { width: 24px; height: 24px; }
+    body.con-pedido .wa-float { bottom: calc(86px + env(safe-area-inset-bottom)); }
 
     /* Barra de accesos */
     .quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; max-width: 600px; }
@@ -416,7 +423,15 @@
       .nav { display: none; }
       .bag-btn { margin-left: auto; }
       .hero-grid { grid-template-columns: 1fr; }
-      .hero-art { aspect-ratio: 1.7; max-width: 440px; margin: 8px auto 0; width: 100%; }
+      .hero-art { order: -1; aspect-ratio: 2.1; max-width: 420px; margin: 0 auto 10px; width: 100%; }
+      .hero { padding-top: 18px; }
+      body.bf .bf-chip { display: none; }
+      .quick { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); max-width: none; }
+      .quick::-webkit-scrollbar { display: none; }
+      .quick a { flex: none; }
+      .facts { display: none; }
+      .wa-float span { display: none; }
+      .wa-float { padding: 14px; }
       .card-img .badges { left: 7px; top: 7px; gap: 4px; }
       .card-img .badge { font-size: 11px; padding: 2px 7px; }
       .bl { display: none; }
@@ -508,7 +523,7 @@
         <div class="hero-grid">
           <div>
             <p class="bf-only bf-chip">Black Friday hasta el lunes 30/11: 5% OFF en CABA y GBA y envío gratis desde $120.000</p>
-            <h1>El arte de dejar huella</h1>
+            <h1>El arte de<br>dejar huella</h1>
             <p class="hero-sub">Perfumes árabes, de diseñador y nicho, sellados de fábrica. Elegí por estilo, armá tu pedido y lo coordinamos por WhatsApp.</p>
             <nav class="quick" aria-label="Accesos rápidos">
               <a class="q-main" href="#catalogo">Ver catálogo</a>
@@ -675,6 +690,7 @@
     <div class="sheet-foot" id="pedido-foot"></div>
   </aside>
   <button class="mbar" id="mbar" type="button"><span><small id="mbar-n"></small><b id="mbar-t"></b></span><span class="go">Ver pedido</span></button>
+  <a class="wa-float" id="wa-float" data-clic="whatsapp-flotante" href="https://wa.me/541165955116?text=Hola!%20Vi%20la%20web%20y%20quiero%20que%20me%20ayuden%20a%20elegir" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg><span>¿Te ayudo a elegir?</span></a>
   <div class="toast" id="toast" role="status"></div>
   <div class="sv" id="sv" role="dialog" aria-modal="true" aria-label="Historias de clientes">
     <div class="sv-in">
@@ -1468,14 +1484,19 @@
           ((b.hot * 2 + b.nuevo) - (a.hot * 2 + a.nuevo)) || a.i - b.i));
       return lista;
     }
-    function pintarGrid() {
+    let mostrar = 12;
+    function pintarGrid(seguir) {
+      if (!seguir) mostrar = 12;
       const lista = filtrar();
       const enStock = lista.filter((p) => !p.out).length;
       $("#count").textContent = `${enStock} ${enStock === 1 ? "perfume" : "perfumes"} en stock`;
-      $("#grid").innerHTML = lista.length ? lista.map((p) => tarjeta(p)).join("") :
+      const visibles = lista.slice(0, mostrar);
+      const quedan = lista.length - visibles.length;
+      $("#grid").innerHTML = lista.length ? visibles.map((p) => tarjeta(p)).join("") + (quedan > 0 ? `<div class="mas-wrap"><button class="btn btn-tinta" type="button" data-mas-cat>Ver ${Math.min(12, quedan)} perfumes más (quedan ${quedan})</button></div>` : "") :
         `<div class="empty"><p>No encontramos perfumes con esos filtros. Probá sacar alguno o escribinos: si no lo tenemos, te recomendamos uno parecido.</p><a class="btn btn-azul" data-clic="busqueda-sin-resultado" href="${wa(`Hola! Busco un perfume ${estado.q ? "tipo " + estado.q + " " : ""}y no lo encontré en la web. ¿Me recomiendan algo?`)}" target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a></div>`;
       pintarChips();
     }
+    document.addEventListener("click", (e) => { if (e.target.closest("[data-mas-cat]")) { mostrar += 12; pintarGrid(true); } });
     let tq;
     $("#q").addEventListener("input", (e) => { clearTimeout(tq); tq = setTimeout(() => { estado.q = e.target.value; pintarGrid(); }, 120); });
     $("#sort").addEventListener("change", (e) => { estado.orden = e.target.value; pintarGrid(); });
@@ -1519,6 +1540,7 @@
       const n = unidades();
       $("#bag-count").textContent = n; $("#bag-count").dataset.n = n;
       $("#mbar").classList.toggle("on", n > 0 && !$("#pedido").classList.contains("on"));
+      document.body.classList.toggle("con-pedido", n > 0);
       $("#mbar-n").textContent = `Tu pedido: ${n} ${n === 1 ? "perfume" : "perfumes"}`;
       $("#mbar-t").textContent = plata(total());
       if (!n) {
