@@ -227,6 +227,7 @@
     .badge.badge-bf { background: var(--tinta); color: #FFB27A; }
     .badge.badge-ship { background: #E3F4EA; color: #155C33; }
     .price-wrap { display: flex; flex-direction: column; line-height: 1.15; }
+    .antes { font-size: 13px; color: var(--grafito); }
     .price-note { font-size: 12.5px; color: var(--grafito); margin-top: 3px; }
     .f-bf { margin-top: 6px; font-size: 14.5px; color: var(--grafito); }
     .resumen { margin-top: 18px; display: grid; gap: 6px; font-size: 15px; }
@@ -1039,7 +1040,7 @@
 
     // Perfumes SIN STOCK: se muestran al final, sin precio y solo con el botón de consultar.
     // Para volver a venderlo, borralo de esta lista (el nombre tiene que estar igual que abajo).
-    const sinStock = ["Soleil Blanc EDP", "Aventus Absolu", "Stronger With You Intensely", "Amber Oud Gold Edition", "Aventus", "My Way (Sunny Vanilla EDP)", "Art of Universe", "Baccarat Rouge 540 tester", "Acqua Di Gioia EDP", "Bad Boy Le Parfum", "Acqua Di Gio Profondo EDP (125 ml)", "Burberry Her EDP", "Veneno Negro"];
+    const sinStock = ["Soleil Blanc EDP", "Aventus Absolu", "Stronger With You Intensely", "Amber Oud Gold Edition", "Aventus", "My Way (Sunny Vanilla EDP)", "Art of Universe", "Baccarat Rouge 540 tester", "Acqua Di Gioia EDP", "Bad Boy Le Parfum", "Acqua Di Gio Profondo EDP (125 ml)", "Burberry Her EDP", "Veneno Negro", "Dior Pour Homme Intense", "Black Orchid EDP", "Chanel Chance EDT", "Versace Dylan Blue (200 ml)"];
 
     const perfumes = [
       { nombre: "Dior Sauvage EDP", marca: "Dior", categoria: "Diseñador", precio: 250000 },
@@ -1355,8 +1356,11 @@
     catalogo.forEach((p) => { p.img = BASE_IMG + p.img; if (p.imgOld && !/^https?:/.test(p.imgOld)) p.imgOld = BASE_IMG + p.imgOld; });
     /* Si falta una foto recortada, se usa la foto anterior. */
     document.addEventListener("error", (e) => { const t = e.target; if (t.tagName === "IMG" && t.dataset.fb) { t.src = t.dataset.fb; t.removeAttribute("data-fb"); } }, true);
+    /* PRECIOS BLACK FRIDAY: rebajas por la lista especial del proveedor. Solo valen mientras dura el Black Friday; después vuelven solos los precios de siempre. */
+    const PRECIOS_BF = {"Dior Sauvage EDP": 246900, "Le Male Elixir (125 ml)": 234900, "Le Male Le Parfum (125 ml)": 218900, "Le Beau Le Parfum (125 ml)": 232900, "Le Beau Paradise Garden (125 ml)": 222900, "1 Million (Clásico)": 205900, "1 Million Elixir Parfum Intense": 240900, "Invictus Victory": 240900, "Invictus Parfum": 240900, "Invictus EDT": 205900, "Stronger With You Powerfully": 262900, "Bad Boy Cobalt Absolue": 215900, "212 VIP Black Elixir": 229900, "Toy Boy 2": 156900, "Rose Prick EDP": 474900, "Dior Sauvage EDT": 215900, "Le Male EDT (125 ml)": 202900, "Stronger With You Parfum": 242900, "Miss Dior EDP": 206900, "Good Girl EDP (Clásico 80 ml)": 240900, "Good Girl Blush (80 ml)": 250900, "212 VIP Rosé (80 ml)": 233900, "La Belle EDP": 227900, "J'adore EDP": 223900, "L'Interdit EDP (80 ml)": 232900, "Fame EDP (80 ml)": 211900, "212 NYC Mujer": 229900, "Uomo Born In Roma": 246900};
     const bfParam = new URLSearchParams(location.search).get("bf");
     const BF_ON = bfParam === "1" || (bfParam !== "0" && Date.now() >= Date.parse(BF.desde) && Date.now() < Date.parse(BF.hasta));
+    if (BF_ON) catalogo.forEach((p) => { if (PRECIOS_BF[p.nombre] && PRECIOS_BF[p.nombre] < p.precio) { p.antes = p.precio; p.precio = PRECIOS_BF[p.nombre]; } });
     const precioBF = (n) => Math.round(n * Math.round((1 - BF.descuento) * 100) / 10000) * 100;
     const envioGratisBF = (p) => BF_ON && p.precio >= BF.envioGratisDesde;
     const porId = Object.fromEntries(catalogo.map((p) => [p.id, p]));
@@ -1379,7 +1383,7 @@
     const icoMas = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
     function tarjeta(p, extra = "") {
       const badges = p.out ? '<span class="badge badge-out">Sin stock</span>' : BF_ON
-        ? ['<span class="badge badge-bf">-5%<span class="bl"> CABA y GBA</span></span>', envioGratisBF(p) ? '<span class="badge badge-ship">Envío gratis</span>' : ""].join("")
+        ? [p.antes ? '<span class="badge badge-hot">Rebajado</span>' : "", '<span class="badge badge-bf">-5%<span class="bl"> CABA y GBA</span></span>', envioGratisBF(p) ? '<span class="badge badge-ship">Envío gratis</span>' : ""].join("")
         : [p.hot ? '<span class="badge badge-hot">Más pedido</span>' : "", p.nuevo ? '<span class="badge badge-new">Nuevo</span>' : ""].join("");
       const f = p.familias[0];
       const accion = p.out
@@ -1395,7 +1399,7 @@
             ${extra}
           </div>
         </button>
-        <div class="card-foot">${p.out ? '<span class="price price-out">Sin stock</span>' : BF_ON ? `<span class="price-wrap"><span class="price">${plata(precioBF(p.precio))}</span><small class="price-note">CABA y GBA. Resto: ${plata(p.precio)}</small></span>` : `<span class="price">${plata(p.precio)}</span>`}${accion}</div>
+        <div class="card-foot">${p.out ? '<span class="price price-out">Sin stock</span>' : BF_ON ? `<span class="price-wrap">${p.antes ? `<s class="antes">${plata(p.antes)}</s>` : ""}<span class="price">${plata(precioBF(p.precio))}</span><small class="price-note">CABA y GBA. Resto: ${plata(p.precio)}</small></span>` : `<span class="price">${plata(p.precio)}</span>`}${accion}</div>
       </article>`;
     }
 
@@ -1435,7 +1439,7 @@
           <div class="x-name">${esc(p.nombre)}</div><div class="x-brand">${esc(p.marca)}${p.duracion ? ", dura " + p.duracion : ""}</div>
           ${p.notas ? `<dl>${Object.entries(p.notas).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(corta(v))}</dd></div>`).join("")}</dl>` : ""}
         </button>
-        <div class="card-foot">${BF_ON ? `<span class="price-wrap"><span class="price">${plata(precioBF(p.precio))}</span><small class="price-note">CABA y GBA. Resto: ${plata(p.precio)}</small></span>` : `<span class="price">${plata(p.precio)}</span>`}<button class="add" type="button" data-add="${p.id}" aria-label="Agregar ${esc(p.nombre)} al pedido">${icoMas}Agregar</button></div>
+        <div class="card-foot">${BF_ON ? `<span class="price-wrap">${p.antes ? `<s class="antes">${plata(p.antes)}</s>` : ""}<span class="price">${plata(precioBF(p.precio))}</span><small class="price-note">CABA y GBA. Resto: ${plata(p.precio)}</small></span>` : `<span class="price">${plata(p.precio)}</span>`}<button class="add" type="button" data-add="${p.id}" aria-label="Agregar ${esc(p.nombre)} al pedido">${icoMas}Agregar</button></div>
       </article>`).join("");
     document.querySelector(".exp-nav").addEventListener("click", (e) => {
       const b = e.target.closest("[data-exp]"); if (!b) return;
@@ -1481,7 +1485,7 @@
       const o = estado.orden;
       lista.sort((a, b) => (a.out - b.out) ||
         (o === "asc" ? a.precio - b.precio : o === "desc" ? b.precio - a.precio : o === "az" ? a.nombre.localeCompare(b.nombre, "es") :
-          ((b.hot * 2 + b.nuevo) - (a.hot * 2 + a.nuevo)) || a.i - b.i));
+          ((b.hot * 2 + b.nuevo + (b.antes ? 3 : 0)) - (a.hot * 2 + a.nuevo + (a.antes ? 3 : 0))) || a.i - b.i));
       return lista;
     }
     let mostrar = 12;
@@ -1589,7 +1593,7 @@
           <div class="f-meta">${BF_ON && !p.out ? '<span class="badge badge-bf">-5% CABA y GBA</span>' : ""}${envioGratisBF(p) ? '<span class="badge badge-ship">Envío gratis</span>' : ""}<span class="badge">${p.origen === "Árabe" ? "Árabe" : p.origen}</span><span class="badge">${p.para === "Unisex" ? "Unisex" : "Para " + p.para.toLowerCase()}</span>${p.familias.map((f) => `<span class="badge" style="background:color-mix(in srgb, ${FAMILIAS[f].c} 35%, white)">${f}</span>`).join("")}</div>
           <h3 class="f-name" id="f-name">${esc(p.nombre)}</h3>
           <div class="f-brand">${esc(p.marca)}</div>
-          <div class="f-price">${p.out ? "Sin stock por ahora" : plata(BF_ON ? precioBF(p.precio) : p.precio)}</div>
+          <div class="f-price">${p.antes && !p.out ? `<s class="antes" style="font-size:17px">${plata(p.antes)}</s> ` : ""}${p.out ? "Sin stock por ahora" : plata(BF_ON ? precioBF(p.precio) : p.precio)}</div>
           ${BF_ON && !p.out ? `<div class="f-bf">Precio Black Friday en CABA y GBA. Resto del país: ${plata(p.precio)}.${envioGratisBF(p) ? " Envío gratis a todo el país." : ""}</div>` : ""}
           ${p.aviso ? `<div class="f-aviso">${esc(p.aviso)}</div>` : ""}
         </div>
